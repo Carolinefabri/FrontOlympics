@@ -2,16 +2,16 @@
 import React from 'react';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
+import VideoComponent from "../components/VideoComponent";
+
 
 const HomePage = () => {
   return (
     <div>
        <NavBar />
-      <h1>Welcome to Paris Olympics Adventures</h1>
-      {/* Conteúdo adicional da página inicial */}
+      <VideoComponent />
       <Footer />
     </div>
   );
 };
-
 export default HomePage;

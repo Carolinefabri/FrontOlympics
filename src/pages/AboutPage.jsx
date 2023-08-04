@@ -2,13 +2,13 @@
 import React from 'react';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
+import About from '../components/About';
 
 const AboutPage = () => {
   return (
     <div>
            <NavBar />
-      <h1>About Page</h1>
-      {/* Conteúdo adicional da página About */}
+      <About />
     </div>
   );
 };

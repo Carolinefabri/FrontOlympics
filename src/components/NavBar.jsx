@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import "../App.css";
 
 const Navbar = () => {
   const location = useLocation();
 
   return (
-    <nav>
+    <nav class="NavBar">
       <ul>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/about">About It</Link></li>
