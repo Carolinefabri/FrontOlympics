@@ -23,7 +23,7 @@ function SignUp() {
     }
   };
   return (
-    <div>
+    <div className="signup-container">
       <form onSubmit={handleSignup}>
       <label>
           Profile Picture:

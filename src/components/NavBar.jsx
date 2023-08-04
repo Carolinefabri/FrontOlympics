@@ -6,7 +6,7 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <nav class="NavBar">
+    <nav className="NavBar">
       <ul>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/about">About It</Link></li>

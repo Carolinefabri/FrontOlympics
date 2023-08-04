@@ -2,14 +2,13 @@
 import React from 'react';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
-import VideoComponent from "../components/VideoComponent";
 
 
 const HomePage = () => {
   return (
     <div>
        <NavBar />
-      <VideoComponent />
+        <img className="homephoto" src="./public/images/home.jpg" alt="homepage"></img>
       <Footer />
     </div>
   );

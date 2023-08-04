@@ -7,7 +7,7 @@ import About from '../components/About';
 const AboutPage = () => {
   return (
     <div>
-           <NavBar />
+      <NavBar />
       <About />
     </div>
   );
