@@ -1,17 +1,18 @@
-// src/pages/AboutPage.jsx
-import React from 'react';
+import React, { useState } from "react";
+import axios from "axios";
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
-import About from '../components/About';
 
 
-const AboutPage = () => {
+const About = () => {
   return (
-    <div>
-      <NavBar />
-      <About />
+      <div>
+    <NavBar />
+    <img className="aboutphoto" src="./public/images/about.png" alt="aboutit"></img>
+    <Footer />
+   
     </div>
   );
 };
 
-export default AboutPage;
+export default About;
