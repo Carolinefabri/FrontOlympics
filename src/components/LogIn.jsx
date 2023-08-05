@@ -1,10 +1,13 @@
-import React, { useState } from "react"; // Don't forget to import useState
+import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Don't forget to import useNavigate
 
 function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
+
+  const nav = useNavigate(); // Initialize useNavigate
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -13,16 +16,21 @@ function LogIn() {
         email,
         password,
       });
-      // Rest of your login logic
+
+      // Assuming the backend returns the user object after successful login
+      // You can store the user data in state or a context if needed
+      console.log("User data after login:", data.user);
+
+      // Redirect to a different page after successful login
+      nav('/AllSports'); 
 
     } catch (err) {
       console.log(err);
-      setErrorMessage(err.response.data.errorMessage);
+      setErrorMessage(err.response.data.message);
     }
   };
 
-  // LogIn.jsx
-return (
+  return (
     <div>
       <form onSubmit={handleLogin}>
         <label>
@@ -48,7 +56,6 @@ return (
       {errorMessage && <p>{errorMessage}</p>}
     </div>
   );
-  
 }
 
 export default LogIn;

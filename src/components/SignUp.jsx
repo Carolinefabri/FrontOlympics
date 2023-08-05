@@ -8,43 +8,52 @@ function SignUp() {
   const [username, setUsername] = useState("");
   const [profilePicture, setProfilePicture] = useState(null);
   const nav = useNavigate();
+
   const handleSignup = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("username", username);
+    formData.append("profilePicture", profilePicture);
+
     try {
-      const res = await axios.post("http://localhost:5005/auth/signup", {
-        email,
-        password,
-        username,
+      const res = await axios.post("http://localhost:5005/auth/signup", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
-      console.log("here is the signup response", res);
+
+      console.log("Signup response:", res);
       nav("/login");
     } catch (err) {
-      console.log(err);
+      console.error("Error during signup:", err);
     }
   };
+
+  const handleProfilePictureChange = (event) => {
+    setProfilePicture(event.target.files[0]);
+  };
+
   return (
     <div className="signup-container">
       <form onSubmit={handleSignup}>
-      <label>
+        <label>
           Profile Picture:
           <input
             type="file"
             accept="image/*"
-            onChange={(event) => {
-                setProfilePicture(event.target.files[0]);
-            }}
+            onChange={handleProfilePictureChange}
           />
-        
         </label>
         <label>
-          username:
+          Username:
           <input
             type="text"
             value={username}
             required
-            onChange={(event) => {
-              setUsername(event.target.value);
-            }}
+            onChange={(event) => setUsername(event.target.value)}
           />
         </label>
         <label>
@@ -53,9 +62,7 @@ function SignUp() {
             type="email"
             value={email}
             required
-            onChange={(event) => {
-              setEmail(event.target.value);
-            }}
+            onChange={(event) => setEmail(event.target.value)}
           />
         </label>
         <label>
@@ -64,12 +71,10 @@ function SignUp() {
             type="password"
             value={password}
             required
-            onChange={(event) => {
-              setPassword(event.target.value);
-            }}
+            onChange={(event) => setPassword(event.target.value)}
           />
         </label>
-        <button type="submit">Signup</button>
+        <button type="submit">Sign Up</button>
       </form>
     </div>
   );

@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../components/NavBar";
 import SignUp from "../components/SignUp";
 
+
 function SignUpPage() {
   return (
     <div>
