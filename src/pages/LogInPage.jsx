@@ -1,16 +1,65 @@
-import React from "react";
-import Navbar from "../components/Navbar"; 
-import LogIn from "../components/LogIn";
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Don't forget to import useNavigate
+import NavBar from '../components/NavBar';
 
+function LogIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
 
-function LogInPage() {
+  const nav = useNavigate(); // Initialize useNavigate
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post("http://localhost:5005/user/login", {
+        email,
+        password,
+      });
+
+      // Assuming the backend returns the user object after successful login
+      // You can store the user data in state or a context if needed
+      console.log("User data after login:", data.user);
+
+      // Redirect to a different page after successful login
+      nav('/AllSports'); 
+
+    } catch (err) {
+      console.log(err);
+      setErrorMessage(err.response.data.message);
+    }
+  };
+
   return (
     <div>
-      <Navbar /> 
-      <h2>Log In Page</h2>
-      <LogIn />
+    <NavBar /> 
+    <div>
+      <form onSubmit={handleLogin}>
+        <label>
+          Email:
+          <input
+            type="email"
+            value={email}
+            required
+            onChange={(event) => setEmail(event.target.value)}
+          />
+        </label>
+        <label>
+          Password:
+          <input
+            type="password"
+            value={password}
+            required
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </label>
+        <button type="submit">Login</button>
+      </form>
+      {errorMessage && <p>{errorMessage}</p>}
+    </div>
     </div>
   );
 }
 
-export default LogInPage;
+export default LogIn;
