@@ -1,6 +1,7 @@
 // src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Importe o componente "Routes"
+import './App.css'
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import SignUpPage from './pages/SignUpPage';
@@ -19,8 +20,9 @@ const App = () => {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LogInPage />} />
         <Route path="/allsports" element={<AllSportsPage />} />
-        <Route path="/sport/:id" element={<SportDetailsPage />} />
+        <Route path="/allsports/:id"  element={<SportDetailsPage />} />
         <Route path="/favoritesport" element={<FavoriteSportPage />} />
+        <Route path='*' element={<h1>404 page</h1>} />
       </Routes>
     </Router>
   );

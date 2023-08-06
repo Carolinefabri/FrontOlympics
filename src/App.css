@@ -4,3 +4,120 @@
   padding:0 0 0 0rem;
 
 }
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: #fdfbfb;
+}
+
+.h1{  
+color:white;
+
+}
+
+  .NavBar {
+    background-color: #033f68;
+    height: 5rem;
+    display: flex;
+    align-items:center;
+    justify-content:right;
+  }
+  
+  .NavBar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .NavBar li {
+    padding-right: 70px;
+  }
+  
+  .NavBar a {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    font-size: 20px;
+  }
+  
+  .NavBar a:hover::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: rgb(54, 172, 172);
+  }
+
+
+/* Estilos para o footer */
+.Footer-class {
+  background-color: #033f68;
+  color:white;
+  height: 5rem;
+  display: flex;
+  align-items:center;
+  justify-content:center;
+  /* Alterado para "center" para centralizar horizontalmente */
+  width: 100%; /* Defina a largura do footer */
+}
+
+    /* Homepage */
+  .homephoto {
+    background-size:cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin-top: 0rem;
+    width: 100%;
+    height: 100%;
+  
+    }
+  
+      /* About*/
+  .aboutphoto {
+    background-size:cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height:60%;
+    }
+  
+
+    /* SignUp*/
+.signup-container {
+
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+  /*allsports*/
+.all-sports {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sport-card {
+  width: calc(33.33% - 20px); /* 3 cards por linha */
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.sport-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.sport-name {
+  display: block;
+  font-size: 16px;
+}

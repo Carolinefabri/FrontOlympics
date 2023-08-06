@@ -3,9 +3,9 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer lassFooter="Footer">
+    <footer className="footer-class">
       <div>
-      <h3>Guiding you to find beauty in games with the Olympic spirit</h3>
+        <h3>Guiding you to find beauty in games with the Olympic spirit</h3>
       </div>
     </footer>
   );
