@@ -11,8 +11,30 @@ const SportDetailsPage = () => {
   const navigate = useNavigate();
 
   const [isFavorited, setIsFavorited] = useState(false);
-  const handleToggleFavorite = () => {
-    setIsFavorited(prevIsFavorited => !prevIsFavorited);
+  const [comment, setComment] = useState('');
+  const [favoriteId, setFavoriteId] = useState(null);
+
+  const handleToggleFavorite = async () => {
+    if (isFavorited) {
+      try {
+        await axios.delete(`/favorites/${favoriteId}`);
+        setIsFavorited(false);
+      } catch (error) {
+        console.error('Error removing favorite:', error);
+      }
+    } else {
+      try {
+        const response = await axios.post('/favorites', {
+          sportId: id,
+          comment,
+          gameDate: sport[0].date,
+        });
+        setIsFavorited(true);
+        setFavoriteId(response.data._id);
+      } catch (error) {
+        console.error('Error adding to favorites:', error);
+      }
+    }
   };
 
   useEffect(() => {
@@ -38,6 +60,14 @@ const SportDetailsPage = () => {
           );
           setEventTemperature(eventLocationTemperature);
         }
+
+        // Check if the sport is favorited and get the favorite ID and comment
+        const response = await axios.get(`/favorites?sport=${id}`);
+        if (response.data.length > 0) {
+          setIsFavorited(true);
+          setFavoriteId(response.data[0]._id);
+          setComment(response.data[0].comments[0]?.text || '');
+        }
       } catch (error) {
         console.error('Error fetching sport:', error);
       }
@@ -52,7 +82,7 @@ const SportDetailsPage = () => {
 
   // Função para obter a temperatura atual para uma localização usando a API do WeatherAPI
   const getCurrentTemperature = async (location) => {
-    const apiKey = '4af68545586849c3a13134128230608 ';
+    const apiKey = '4af68545586849c3a13134128230608';
     const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${encodeURIComponent(location)}`;
 
     try {
@@ -72,7 +102,7 @@ const SportDetailsPage = () => {
 
   // Função para obter a temperatura para uma localização e data usando a API do WeatherAPI
   const getTemperatureForEventDate = async (location, date) => {
-    const apiKey = '4af68545586849c3a13134128230608 ';
+    const apiKey = '4af68545586849c3a13134128230608';
     const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${encodeURIComponent(
       location
     )}&dt=${encodeURIComponent(date)}`;
@@ -109,7 +139,9 @@ const SportDetailsPage = () => {
       {eventTemperature && <p>Temperature on Event Day: {eventTemperature} °C</p>}
       {/* Render other details */}
       <button onClick={() => navigate('/allsports')}>Back to All Sports</button>
-      <button onClick={() => navigate('/FavoriteSport')}>Favorite</button>
+      <button onClick={() => handleAddToFavorite(sport._id)}>Add to Favorites</button>
+      
+    
     </div>
   ) : (
     <h1>Loading...</h1>
