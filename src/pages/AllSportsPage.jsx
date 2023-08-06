@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom"; 
-
+import { Link , useParams, useNavigate } from 'react-router-dom';
+import axios from "axios"; 
 
 const AllSportsPage = () => {
   const [sports, setSports] = useState([]);
+  const [loading, setLoading] = useState(true); // Adicione o estado de carregamento
 
   async function fetchSports() {
     try {
@@ -14,6 +14,8 @@ const AllSportsPage = () => {
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false); // Defina o estado de carregamento como falso, independentemente do resultado
     }
   }
 
@@ -24,17 +26,16 @@ const AllSportsPage = () => {
   return (
     <div className="all-sports">
       <h1>All Sports</h1>
-      {sports.map(sport => (
-        <div key={sport.id} className="sport-card"
-          style={{ display: 'block', border: '1px solid lightgrey', margin: '1rem 0' }}
-          >
-            
-          <Link to={`/allsports/${sport.id}`}>
+      {loading ? ( // Renderize um indicador de carregamento se estiver carregando
+        <p>Loading...</p>
+      ) : (
+        sports.map(sport => (
+          <Link to={`/allsports/${sport.id}`} key={sport.id} className="sport-card">
             <img src={sport.image} alt={sport.name} className="sport-image" />
             <span className="sport-name">{sport.name}</span>
           </Link>
-        </div>
-      ))}
+        ))
+      )}
     </div>
   ) 
 }
