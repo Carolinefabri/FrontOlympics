@@ -51,9 +51,56 @@ const SignUp = () => {
 
   return (
     <div>
-      <Navbar /> 
-      <h2>Sign Up Page</h2>
-      <SignUp /> 
+    <NavBar />
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="userName">Username:</label>
+        <input
+          type="text"
+          id="userName"
+          name="userName"
+          value={formData.userName}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="profilePicture">Profile Picture:</label>
+        <input
+          type="file"
+          id="profilePicture"
+          name="profilePicture"
+          onChange={handleImageChange}
+        />
+      </div>
+      {formData.profilePicture && (
+        <img
+          src={URL.createObjectURL(formData.profilePicture)}
+          alt="Profile Picture"
+          style={{ width: "200px", height: "200px" }}
+        />
+      )}
+      <button type="submit">Sign Up</button>
+    </form>
     </div>
   );
 };
