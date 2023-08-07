@@ -105,7 +105,7 @@ const SportDetailsPage = () => {
       const user = localStorage.getItem("user")
       console.log(user)
       const response = await axios.get(`http://localhost:5005/favorites/${id}/addfavorite/${user}`)
-      navigate('/favorites')
+      navigate(`/favorites/${user}`)
     }
     catch (error) {
       console.error('Error :', error);
@@ -145,12 +145,11 @@ const SportDetailsPage = () => {
 >
   <p>Check out our partners</p>
 </a>
-
-    </div>
+</div>
     </div>
   ) : (
     <h1>Loading...</h1>
   );
-  };
+};
 
 export default SportDetailsPage;

@@ -1,13 +1,25 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import NavBarAdmin from '../components/NavBarAdmin';
-import '../App.css';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Importe o componente Link
+import NavBar from '../components/NavBar';
+import axios from 'axios';
 
-const AdminPage = ({ user }) => {
-  const navigate = useNavigate();
+const AdminPage = () => {
+  const userId = useAuth(); // Get the userId using the useAuth hook
+  const [username, setUsername] = useState('');
 
-  const handleGetStarted = () => {
-    navigate('/allsports');
+  useEffect(() => {
+    if (userId) {
+      fetchUserData();
+    }
+  }, [userId]);
+
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5005/user/${userId}`);
+      setUsername(response.data.username);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
