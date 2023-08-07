@@ -9,9 +9,7 @@ import LogInPage from './pages/LogInPage';
 import AdminPage from './pages/AdminPage';
 import AllSportsPage from './pages/AllSportsPage';
 import SportDetailsPage from './pages/SportDetailsPage';
-import { FavoritesProvider } from './contexts/FavoritesContext';
 import FavoriteSportPage from './pages/FavoriteSportPage';
-
 
 
 const App = () => {
@@ -22,12 +20,11 @@ const App = () => {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LogInPage />} />
-        <Route path="/admin" element={<AdminPage />} /> 
+        <Route path="/admin" element={<AdminPage user="" />} />
         <Route path="/allsports" element={<AllSportsPage />} />
         <Route path="/allsports/:id"  element={<SportDetailsPage />} />
         <Route path="/favorites" element={<FavoriteSportPage />} />
-        <Route path="/favorites/sportId" element={<FavoriteSportPage />} />
-        
+        <Route path="/favorites/:sportId" element={<FavoriteSportPage />} /> {/* Correção aqui */}
       </Routes>
     </Router>
   );

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useResolvedPath } from 'react-router-dom';
 import { fetchSport } from '../utils/sportsAPICall';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
+import NavBarAdmin from '../components/NavBarAdmin';
 
 const SportDetailsPage = () => {
   const { id } = useParams();
@@ -99,8 +100,21 @@ const SportDetailsPage = () => {
       return null;
     }
   };
+  const handleAddtofavorite = async () => {
+    try {
+      const user = localStorage.getItem("user")
+      console.log(user)
+      const response = await axios.get(`http://localhost:5005/favorites/${id}/addfavorite/${user}`)
+      navigate('/favorites')
+    }
+    catch (error) {
+      console.error('Error :', error);
+      return null;
+    }
+  };
 
   return sport ? (
+    <div><NavBarAdmin />
     <div className="sport-card">
       <h1>Sport Details</h1>
       <img src={sport[0].image} alt={sport[0].name} className="sport-image" />
@@ -119,19 +133,24 @@ const SportDetailsPage = () => {
       <button onClick={handleToggleFavorite}>
         <FontAwesomeIcon icon={isFavorited ? solidHeart : regularHeart} style={{ color: 'red' }} />
       </button>
-      <button onClick={() => navigate('/favorites')}>Favorites</button>
+      <button onClick={ handleAddtofavorite}>Favorites</button>
+      
             {/* Add the link to check hotels in a specific region */}
+          
+          <p>Don't have an accommodation yet?</p>
             <a
-        href="https://www.trivago.pt/pt/lm/hot%C3%A9is-paris-fran%C3%A7a?search=200-22235;dr-20230817-20230818"
-        target="_blank"  // To open the link in a new tab
-        rel="noopener noreferrer"  // Recommended for security reasons
-      >
-        If you are interested in finding accommodation in the region, check the link here.
-      </a>
+          href="https://www.trivago.pt/pt/lm/hoteis-paris-franca?search=200-22235;dr-20230817-20230818"
+          target="_blank"  // Para abrir o link em uma nova aba
+          rel="noopener noreferrer"  // Recomendado por motivos de segurança
+>
+  <p>Check out our partners</p>
+</a>
+
+    </div>
     </div>
   ) : (
     <h1>Loading...</h1>
   );
-};
+  };
 
 export default SportDetailsPage;

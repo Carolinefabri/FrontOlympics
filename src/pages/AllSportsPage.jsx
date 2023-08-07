@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
+import NavBarAdmin from '../components/NavBarAdmin'; 
 
 
 const AllSportsPage = () => {
@@ -25,6 +26,8 @@ const AllSportsPage = () => {
   }, []);
 
   return (
+  
+    <div><NavBarAdmin />
     <div className="all-sports">
       <h1>All Sports</h1>
       {sports.map(sport => (
@@ -38,6 +41,7 @@ const AllSportsPage = () => {
           </Link>
         </div>
       ))}
+    </div>
     </div>
   ) 
 }
