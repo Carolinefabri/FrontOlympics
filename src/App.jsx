@@ -23,7 +23,7 @@ const App = () => {
         <Route path="/allsports" element={<AllSportsPage />} />
         <Route path="/allsports/:id"  element={<SportDetailsPage />} />
         <Route path="/favorites" element={<FavoriteSportPage />} />
-        <Route path='*' element={<h1>404 page</h1>} />
+        
       </Routes>
     </Router>
   );

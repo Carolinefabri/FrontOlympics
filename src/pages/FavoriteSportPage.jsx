@@ -1,45 +1,82 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useFavoritesContext } from '../contexts/FavoritesContext';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const FavoriteSportPage = () => {
-  const { favoriteSports, removeFavorite, isFavorite } = useFavoritesContext();
-  const navigate = useNavigate();
+const FavoritesPage = () => {
+  const [favorites, setFavorites] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const handleRemoveFavorite = async (sportId) => {
-    try {
-      const response = await fetch('/favoriteport', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ sportId }),
-      });
-
-      if (response.ok) {
-        removeFavorite(sportId); // Remove from context
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      try {
+        const response = await axios.get('/favorites');
+        setFavorites(response.data);
+      } catch (error) {
+        console.error('Error fetching favorites:', error);
+      } finally {
+        setLoading(false);
       }
+    };
+
+    fetchFavorites();
+  }, []);
+
+  const handleAddComment = async (favoriteId, comment) => {
+    try {
+      await axios.put(`/favorites/${favoriteId}`, { comment });
+      // Update the local state to reflect the new comment
+      setFavorites((prevFavorites) =>
+        prevFavorites.map((favorite) =>
+          favorite._id === favoriteId ? { ...favorite, comments: [{ text: comment, date: new Date() }] } : favorite
+        )
+      );
     } catch (error) {
-      console.error('Error removing favorite sport:', error);
+      console.error('Error adding comment:', error);
+    }
+  };
+
+  const handleDeleteFavorite = async (favoriteId) => {
+    try {
+      await axios.delete(`/favorites/${favoriteId}`);
+      // Update the local state to remove the deleted favorite
+      setFavorites((prevFavorites) => prevFavorites.filter((favorite) => favorite._id !== favoriteId));
+    } catch (error) {
+      console.error('Error deleting favorite:', error);
     }
   };
 
   return (
     <div>
-      <h1>Your Favorite Sports</h1>
-      <ul>
-        {favoriteSports.map(sport => (
-          <li key={sport.id}>
-            <h3>{sport.name}</h3>
-            <button onClick={() => handleRemoveFavorite(sport.id)}>
-              Remove from Favorites
-            </button>
-          </li>
-        ))}
-      </ul>
-      <button onClick={() => navigate('/allsports')}>Back to All Sports</button>
+      <h1>Favorites</h1>
+      {loading ? (
+        <p>Loading...</p>
+      ) : favorites.length > 0 ? (
+        favorites.map((favorite) => (
+          <div key={favorite._id}>
+            <h2>{favorite.sport.name}</h2>
+            <img src={favorite.sport.image} alt={favorite.sport.name} className="sport-image" />
+            <h3>Location: {favorite.sport.location}</h3>
+            <h4>Venue: {favorite.sport.venue}</h4>
+            <h4>Date: {favorite.sport.date}</h4>
+            <p>Comment: {favorite.comments[0]?.text || 'No comment'}</p>
+            <button onClick={() => handleDeleteFavorite(favorite._id)}>Remove from Favorites</button>
+            <div>
+              <input
+                type="text"
+                value={favorite.comments[0]?.text || ''}
+                onChange={(e) => handleAddComment(favorite._id, e.target.value)}
+                placeholder="Add a comment..."
+              />
+              <button onClick={() => handleAddComment(favorite._id, favorite.comments[0]?.text)}>
+                Save Comment
+              </button>
+            </div>
+          </div>
+        ))
+      ) : (
+        <p>No favorites added yet.</p>
+      )}
     </div>
   );
 };
 
-export default FavoriteSportPage;
+export default FavoritesPage;
