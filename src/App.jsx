@@ -9,6 +9,8 @@ import LogInPage from './pages/LogInPage';
 import AllSportsPage from './pages/AllSportsPage';
 import SportDetailsPage from './pages/SportDetailsPage';
 import FavoriteSportPage from './pages/FavoriteSportPage';
+import ProfilePage from './pages/ProfilePage';
+import CommunityPage from './pages/CommunityPage';
 
 
 const App = () => {
@@ -22,6 +24,8 @@ const App = () => {
         <Route path="/allsports" element={<AllSportsPage />} />
         <Route path="/allsports/:id"  element={<SportDetailsPage />} />
         <Route path="/favorites" element={<FavoriteSportPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/community" element={<CommunityPage />} />
         
       </Routes>
     </Router>
