@@ -1,7 +1,7 @@
 
 #root {
   margin: 0;
-  padding:0 0 0 0rem;
+  padding:0 0 0 0 0 rem;
 
 }
 
@@ -49,7 +49,15 @@ color:white;
     left: 0;
     width: 100%;
     height: 3px;
-    background-color: rgb(54, 172, 172);
+    background-color: #0FEB6D;
+  }
+
+  .Sidebar {
+    background-color: #033f68;
+    height: 5rem;
+    display: flex;
+    align-items:center;
+    justify-content:right;
   }
 
   .Sidebar {

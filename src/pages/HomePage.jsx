@@ -9,7 +9,7 @@ const HomePage = () => {
   return (
     <div>
        <NavBar />
-        <img className="homephoto" src="./public/images/home.jpg" alt="homepage"></img>
+        <img className="homephoto" src="./public/images/home.jpeg" alt="homepage"></img>
       <Footer />
     </div>
   );

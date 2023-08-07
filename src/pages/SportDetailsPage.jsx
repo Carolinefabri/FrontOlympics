@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useResolvedPath } from 'react-router-dom';
 import { fetchSport } from '../utils/sportsAPICall';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
+import NavBarAdmin from '../components/NavBarAdmin';
 
 const SportDetailsPage = () => {
   const { id } = useParams();
@@ -11,30 +15,9 @@ const SportDetailsPage = () => {
   const navigate = useNavigate();
 
   const [isFavorited, setIsFavorited] = useState(false);
-  const [comment, setComment] = useState('');
-  const [favoriteId, setFavoriteId] = useState(null);
 
-  const handleToggleFavorite = async () => {
-    if (isFavorited) {
-      try {
-        await axios.delete(`/favorites/${favoriteId}`);
-        setIsFavorited(false);
-      } catch (error) {
-        console.error('Error removing favorite:', error);
-      }
-    } else {
-      try {
-        const response = await axios.post('/favorites', {
-          sportId: id,
-          comment,
-          gameDate: sport[0].date,
-        });
-        setIsFavorited(true);
-        setFavoriteId(response.data._id);
-      } catch (error) {
-        console.error('Error adding to favorites:', error);
-      }
-    }
+  const handleToggleFavorite = () => {
+    setIsFavorited((prevState) => !prevState);
   };
 
   useEffect(() => {
@@ -65,8 +48,6 @@ const SportDetailsPage = () => {
         const response = await axios.get(`/favorites?sport=${id}`);
         if (response.data.length > 0) {
           setIsFavorited(true);
-          setFavoriteId(response.data[0]._id);
-          setComment(response.data[0].comments[0]?.text || '');
         }
       } catch (error) {
         console.error('Error fetching sport:', error);
@@ -76,10 +57,7 @@ const SportDetailsPage = () => {
     fetchSportData();
   }, [id]);
 
-  console.log('Sport state:', sport);
-  console.log('Current Temperature:', currentTemperature);
-  console.log('Event Temperature:', eventTemperature);
-
+  
   // Função para obter a temperatura atual para uma localização usando a API do WeatherAPI
   const getCurrentTemperature = async (location) => {
     const apiKey = '4af68545586849c3a13134128230608';
@@ -122,8 +100,21 @@ const SportDetailsPage = () => {
       return null;
     }
   };
+  const handleAddtofavorite = async () => {
+    try {
+      const user = localStorage.getItem("user")
+      console.log(user)
+      const response = await axios.get(`http://localhost:5005/favorites/${id}/addfavorite/${user}`)
+      navigate(`/favorites/${user}`)
+    }
+    catch (error) {
+      console.error('Error :', error);
+      return null;
+    }
+  };
 
   return sport ? (
+    <div><NavBarAdmin />
     <div className="sport-card">
       <h1>Sport Details</h1>
       <img src={sport[0].image} alt={sport[0].name} className="sport-image" />
@@ -138,10 +129,23 @@ const SportDetailsPage = () => {
       {/* Display temperature for event date if available */}
       {eventTemperature && <p>Temperature on Event Day: {eventTemperature} °C</p>}
       {/* Render other details */}
-      <button onClick={() => navigate('/allsports')}>Back to All Sports</button>
-      <button onClick={() => handleAddToFavorite(sport._id)}>Add to Favorites</button>
+      <button onClick={() => navigate('/allsports')}>All Sports</button>
+      <button onClick={handleToggleFavorite}>
+        <FontAwesomeIcon icon={isFavorited ? solidHeart : regularHeart} style={{ color: 'red' }} />
+      </button>
+      <button onClick={ handleAddtofavorite}>Favorites</button>
       
-    
+            {/* Add the link to check hotels in a specific region */}
+          
+          <p>Don't have an accommodation yet?</p>
+            <a
+          href="https://www.trivago.pt/pt/lm/hoteis-paris-franca?search=200-22235;dr-20230817-20230818"
+          target="_blank"  // Para abrir o link em uma nova aba
+          rel="noopener noreferrer"  // Recomendado por motivos de segurança
+>
+  <p>Check out our partners</p>
+</a>
+</div>
     </div>
   ) : (
     <h1>Loading...</h1>
