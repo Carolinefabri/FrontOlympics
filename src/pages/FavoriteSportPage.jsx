@@ -1,82 +1,88 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// SportDetailsPage.jsx
 
-const FavoritesPage = () => {
-  const [favorites, setFavorites] = useState([]);
-  const [loading, setLoading] = useState(true);
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { fetchSport } from '../utils/sportsAPICall';
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
+
+const SportDetailsPage = () => {
+  const { id } = useParams();
+  const [sport, setSport] = useState(null);
+  const navigate = useNavigate();
+
+  const [isLiked, setIsLiked] = useState(false);
+  const [favoriteId, setFavoriteId] = useState(null);
+
+  const handleToggleLike = async () => {
+    try {
+      if (isLiked) {
+        // If the sport is already liked, remove it from favorites
+        await axios.delete(`/favorites/${favoriteId}`);
+        setIsLiked(false);
+      } else {
+        // If the sport is not liked, add it to favorites
+        const response = await axios.post('/favorites', {
+          sportId: id,
+          comment: '', // Add any comment you want to save with the favorite
+        });
+        setIsLiked(true);
+        setFavoriteId(response.data._id);
+      }
+    } catch (error) {
+      console.error('Error toggling like:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchFavorites = async () => {
+    const fetchSportData = async () => {
+      console.log('Fetching sport data for ID:', id);
+
       try {
-        const response = await axios.get('/favorites');
-        setFavorites(response.data);
+        const fetchedSport = await fetchSport(id);
+        console.log('Fetched sport:', fetchedSport);
+        setSport(fetchedSport);
+
+        // Check if the sport is favorited and get the favorite ID
+        const response = await axios.get(`/favorites?sportId=${id}`);
+        if (response.data.length > 0) {
+          setIsLiked(true);
+          setFavoriteId(response.data[0]._id);
+        }
       } catch (error) {
-        console.error('Error fetching favorites:', error);
-      } finally {
-        setLoading(false);
+        console.error('Error fetching sport:', error);
       }
     };
 
-    fetchFavorites();
-  }, []);
+    fetchSportData();
+  }, [id]);
 
-  const handleAddComment = async (favoriteId, comment) => {
-    try {
-      await axios.put(`/favorites/${favoriteId}`, { comment });
-      // Update the local state to reflect the new comment
-      setFavorites((prevFavorites) =>
-        prevFavorites.map((favorite) =>
-          favorite._id === favoriteId ? { ...favorite, comments: [{ text: comment, date: new Date() }] } : favorite
-        )
-      );
-    } catch (error) {
-      console.error('Error adding comment:', error);
-    }
-  };
+  return sport ? (
+    <div className="sport-card">
+      <h1>Sport Details</h1>
+      <img src={sport.image} alt={sport.name} className="sport-image" />
+      <span>
+        <h2>{sport.name}</h2>
+      </span>
+      <h3>Location: {sport.location}</h3>
+      <h4>Venue: {sport.venue}</h4>
+      <h4>Date: {sport.date}</h4>
 
-  const handleDeleteFavorite = async (favoriteId) => {
-    try {
-      await axios.delete(`/favorites/${favoriteId}`);
-      // Update the local state to remove the deleted favorite
-      setFavorites((prevFavorites) => prevFavorites.filter((favorite) => favorite._id !== favoriteId));
-    } catch (error) {
-      console.error('Error deleting favorite:', error);
-    }
-  };
+      {/* Heart icon */}
+      <FontAwesomeIcon
+        icon={isLiked ? solidHeart : regularHeart}
+        onClick={handleToggleLike}
+        style={{ color: isLiked ? 'red' : 'black', cursor: 'pointer' }}
+      />
 
-  return (
-    <div>
-      <h1>Favorites</h1>
-      {loading ? (
-        <p>Loading...</p>
-      ) : favorites.length > 0 ? (
-        favorites.map((favorite) => (
-          <div key={favorite._id}>
-            <h2>{favorite.sport.name}</h2>
-            <img src={favorite.sport.image} alt={favorite.sport.name} className="sport-image" />
-            <h3>Location: {favorite.sport.location}</h3>
-            <h4>Venue: {favorite.sport.venue}</h4>
-            <h4>Date: {favorite.sport.date}</h4>
-            <p>Comment: {favorite.comments[0]?.text || 'No comment'}</p>
-            <button onClick={() => handleDeleteFavorite(favorite._id)}>Remove from Favorites</button>
-            <div>
-              <input
-                type="text"
-                value={favorite.comments[0]?.text || ''}
-                onChange={(e) => handleAddComment(favorite._id, e.target.value)}
-                placeholder="Add a comment..."
-              />
-              <button onClick={() => handleAddComment(favorite._id, favorite.comments[0]?.text)}>
-                Save Comment
-              </button>
-            </div>
-          </div>
-        ))
-      ) : (
-        <p>No favorites added yet.</p>
-      )}
+      {/* ... Render other details ... */}
     </div>
+  ) : (
+    <h1>Loading...</h1>
   );
 };
 
-export default FavoritesPage;
+export default SportDetailsPage;
+
