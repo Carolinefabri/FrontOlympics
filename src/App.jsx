@@ -11,6 +11,8 @@ import SportDetailsPage from './pages/SportDetailsPage';
 import FavoriteSportPage from './pages/FavoriteSportPage';
 import { AuthContextWrapper } from "./context/Auth.context";
 import IsPrivate from "./components/IsPrivate"; // Import the IsPrivate component
+import ProfilePage from './pages/ProfilePage';
+import CommunityPage from './pages/CommunityPage';
 
 function App() {
   return (
@@ -26,6 +28,12 @@ function App() {
         <Route path="/allsports/:id" element={<IsPrivate><SportDetailsPage /></IsPrivate>} />
     
         <Route path="/favorites/:user" element={<FavoriteSportPage />} />
+        <Route path="/allsports" element={<AllSportsPage />} />
+        <Route path="/allsports/:id"  element={<SportDetailsPage />} />
+        <Route path="/favorites" element={<FavoriteSportPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/community" element={<CommunityPage />} />
+        
       </Routes>
     </Router>
   );
