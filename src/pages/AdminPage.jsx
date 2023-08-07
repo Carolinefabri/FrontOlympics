@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Importe o componente Link
 import NavBar from '../components/NavBar';
 import axios from 'axios';
-
 
 const AdminPage = () => {
   const userId = useAuth(); // Get the userId using the useAuth hook
@@ -26,7 +26,8 @@ const AdminPage = () => {
     <div>
       <NavBar />
       <h2>Welcome, {username}</h2>
-      {userId && <p>User ID: {userId}</p>}
+
+      <Link to="/allsports">Go to All Sports</Link> {/* Botão para redirecionar */}
       <Footer />
     </div>
   );

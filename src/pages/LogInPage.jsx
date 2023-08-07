@@ -22,10 +22,10 @@ function LogIn() {
 
       // Store the token and user data in localStorage
       localStorage.setItem("authToken", token);
-      localStorage.setItem("user", JSON.stringify(user)); // Convert user object to string before saving
+      localStorage.setItem("user", user._id); // Convert user object to string before saving
 
       // Redirect to a different page after successful login
-      nav('/admin');
+      nav('/allsports');
 
     } catch (err) {
       console.log(err);

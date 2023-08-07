@@ -33,7 +33,6 @@ const AuthContextWrapper = (props) => {
   };
 
   const logOutUser = () => {
- 
     localStorage.removeItem("authToken");
     localStorage.removeItem("user");
     authenticateUser();
