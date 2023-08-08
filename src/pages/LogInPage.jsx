@@ -25,7 +25,7 @@ function LogIn() {
       localStorage.setItem("user", user._id); // Convert user object to string before saving
 
       // Redirect to a different page after successful login
-      nav('/allsports');
+      nav('/admin');
 
     } catch (err) {
       console.log(err);

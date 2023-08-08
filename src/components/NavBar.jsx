@@ -8,6 +8,7 @@ const Navbar = () => {
   return (
     <nav className="NavBar">
       <ul>
+        <li><h1>SportSoul</h1></li>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/about">About It</Link></li>
         {location.pathname !== '/signup' && (

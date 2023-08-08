@@ -12,7 +12,27 @@ const SportDetailsPage = () => {
   const [sport, setSport] = useState(null);
   const [currentTemperature, setCurrentTemperature] = useState(null);
   const [eventTemperature, setEventTemperature] = useState(null);
+
   const navigate = useNavigate();
+
+
+  const [commentText, setCommentText] = useState('');
+  
+  const handleWriteComment = async () => {
+    try {
+      const response = await axios.post(`http://localhost:5005/favorites/${id}/comments`, {
+        text: commentText,
+      });
+      // Atualizar o esporte com o novo comentário
+      setSport((prevSport) => ({
+        ...prevSport,
+        comments: [...prevSport.comments, response.data],
+      }));
+      setCommentText(''); // Limpar o campo de texto do comentário
+    } catch (error) {
+      console.error('Error writing comment:', error);
+    }
+  };
 
   const [isFavorited, setIsFavorited] = useState(false);
 
@@ -106,6 +126,7 @@ const SportDetailsPage = () => {
       console.log(user)
       const response = await axios.get(`http://localhost:5005/favorites/${id}/addfavorite/${user}`)
       navigate(`/favorites/${user}`)
+      
     }
     catch (error) {
       console.error('Error :', error);
@@ -130,23 +151,34 @@ const SportDetailsPage = () => {
       {eventTemperature && <p>Temperature on Event Day: {eventTemperature} °C</p>}
       {/* Render other details */}
       <button onClick={() => navigate('/allsports')}>All Sports</button>
-      <button onClick={handleToggleFavorite}>
+      <button onClick={handleAddtofavorite}>
         <FontAwesomeIcon icon={isFavorited ? solidHeart : regularHeart} style={{ color: 'red' }} />
       </button>
-      <button onClick={ handleAddtofavorite}>Favorites</button>
-      
-            {/* Add the link to check hotels in a specific region */}
-          
-          <p>Don't have an accommodation yet?</p>
-            <a
+      <h4>Comments:</h4>
+          {sport.comments &&
+            sport.comments.map((comment) => (
+              <p key={comment._id}>{comment.text}</p>
+            ))}
+          {/* Formulário para escrever um novo comentário */}
+          <textarea
+            rows="3"
+            placeholder="Write a comment..."
+            value={commentText}
+            onChange={(e) => setCommentText(e.target.value)}
+          />
+          <button onClick={handleWriteComment}>Add Comment</button>
+        </div>
+           {/* Add the link to check hotels in a specific region */}
+        <p>Don't have an accommodation yet?</p>
+        <a
           href="https://www.trivago.pt/pt/lm/hoteis-paris-franca?search=200-22235;dr-20230817-20230818"
-          target="_blank"  // Para abrir o link em uma nova aba
-          rel="noopener noreferrer"  // Recomendado por motivos de segurança
->
-  <p>Check out our partners</p>
-</a>
-</div>
-    </div>
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <p>Check out our partners</p>
+        </a>
+      </div>
+    
   ) : (
     <h1>Loading...</h1>
   );

@@ -52,4 +52,3 @@ const AllSportsPage = () => {
 };
 
 export default AllSportsPage;
-

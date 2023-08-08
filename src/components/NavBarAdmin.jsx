@@ -10,8 +10,8 @@ const NavbarAdmin = () => {
       {location.pathname !== '/admin' && (
             <li><Link to="/admin">Admin</Link></li>
           )}
-          {location.pathname !== '/favorites' && (
-            <li><Link to="/favorites">Favorites</Link></li>
+          {location.pathname !== '(`/favorites/${user})' && (
+            <li><Link to="(`/favorites/${user})">Favorites</Link></li>
           )}
        
           {/* Add more conditionals for other links */}

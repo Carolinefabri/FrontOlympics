@@ -23,14 +23,10 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LogInPage />} />
         {/* Wrap the protected routes with IsPrivate component */}
-        <Route path="/admin" element={<IsPrivate><AdminPage /></IsPrivate>} />
-        <Route path="/allsports" element={<IsPrivate><AllSportsPage /></IsPrivate>} />
-        <Route path="/allsports/:id" element={<IsPrivate><SportDetailsPage /></IsPrivate>} />
-    
+        <Route path="/admin" element={<IsPrivate><AdminPage/></IsPrivate>} />
         <Route path="/favorites/:user" element={<FavoriteSportPage />} />
         <Route path="/allsports" element={<AllSportsPage />} />
         <Route path="/allsports/:id"  element={<SportDetailsPage />} />
-        <Route path="/favorites" element={<FavoriteSportPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/community" element={<CommunityPage />} />
         
