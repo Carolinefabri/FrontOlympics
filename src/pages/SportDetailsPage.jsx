@@ -106,6 +106,7 @@ const SportDetailsPage = () => {
       console.log(user)
       const response = await axios.get(`http://localhost:5005/favorites/${id}/addfavorite/${user}`)
       navigate(`/favorites/${user}`)
+      
     }
     catch (error) {
       console.error('Error :', error);
@@ -130,10 +131,10 @@ const SportDetailsPage = () => {
       {eventTemperature && <p>Temperature on Event Day: {eventTemperature} °C</p>}
       {/* Render other details */}
       <button onClick={() => navigate('/allsports')}>All Sports</button>
-      <button onClick={handleToggleFavorite}>
+      <button onClick={handleAddtofavorite}>
         <FontAwesomeIcon icon={isFavorited ? solidHeart : regularHeart} style={{ color: 'red' }} />
       </button>
-      <button onClick={ handleAddtofavorite}>Favorites</button>
+  
       
             {/* Add the link to check hotels in a specific region */}
           
