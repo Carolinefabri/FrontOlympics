@@ -11,7 +11,7 @@ import SportDetailsPage from './pages/SportDetailsPage';
 import FavoriteSportPage from './pages/FavoriteSportPage';
 import ProfilePage from './pages/ProfilePage';
 import CommunityPage from './pages/CommunityPage';
-import IsPrivate from './components/isPrivate';
+import IsPrivate from './components/IsPrivate';
 
 function App() {
   return (
@@ -39,3 +39,4 @@ function App() {
 }
 
 export default App;
+
