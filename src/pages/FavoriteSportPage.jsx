@@ -26,7 +26,7 @@ const SportsPage = () => {
 
   const handleDeleteFavorite = async (favoriteId) => {
     try {
-      await axios.delete(`${API_URL}/favorites/${favoriteId}/removefavorite/${user}`);   
+      await axios.delete(`http://localhost:5005/favorites/${favoriteId}/removefavorite/${user}`);
       fetchUserSports();
     } catch (error) {
       console.error('Error:', error);
@@ -41,7 +41,7 @@ const SportsPage = () => {
     <h3 style={{ textAlign: 'center', margin: '10px 0' }}>Get Ready for Game Day!</h3>
    
         <div className="sport-list">
-          {userSports.map((sport) => (
+          {userSports.map(( sport) => (
             <div key={sport._id} className="sport-card">
               <h3>Sport: {sport.name}</h3>
               <p>Location: {sport.location}</p>
