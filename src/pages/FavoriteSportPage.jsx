@@ -10,6 +10,7 @@ const SportsPage = () => {
   const { user } = useParams();
   const [userSports, setUserSports] = useState([]);
 
+
   useEffect(() => {
     fetchUserSports();
   }, []);
@@ -18,6 +19,7 @@ const SportsPage = () => {
     try {
       const response = await axios.get( `${API_URL}/favorites/${user}`);   
       setUserSports(response.data);
+     
       console.log(response.data);
     } catch (error) {
       console.error(error);
@@ -26,20 +28,22 @@ const SportsPage = () => {
 
   const handleDeleteFavorite = async (favoriteId) => {
     try {
-      await axios.delete(`http://localhost:5005/favorites/${favoriteId}/removefavorite/${user}`);
+      await axios.delete(`${API_URL}/favorites/${favoriteId}/removefavorite/${user}`); 
       fetchUserSports();
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
-  return (
+  return userSports ? (
     <div>
       <NavBarAdmin />
   <div className="sport-container">
     <h1 style={{ textAlign: 'center', margin: '20px 0' }}>Your Favorite Sports</h1>
     <h3 style={{ textAlign: 'center', margin: '10px 0' }}>Get Ready for Game Day!</h3>
    
+
+  
         <div className="sport-list">
           {userSports.map(( sport) => (
             <div key={sport._id} className="sport-card">
@@ -60,7 +64,9 @@ const SportsPage = () => {
         </div>
       </div>
     </div>
-  );
+  ):
+  (<h1>Loading</h1>)
+  
 };
 
 export default SportsPage;
