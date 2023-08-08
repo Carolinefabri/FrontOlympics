@@ -57,7 +57,7 @@ const SportsPage = () => {
               <p>Comments {sport.comments}</p>
               <div className="heart-icon">
                 <FontAwesomeIcon icon={solidHeart} style={{ color: 'red', fontSize: '20px' }} />
-                <button onClick={() => handleDeleteFavorite(_id)}>Delete</button>
+                <button onClick={() => handleDeleteFavorite(sport._id)}>Delete</button>
               </div>
             </div>
           ))}
