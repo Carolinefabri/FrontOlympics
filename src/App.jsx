@@ -10,7 +10,7 @@ import AllSportsPage from './pages/AllSportsPage';
 import SportDetailsPage from './pages/SportDetailsPage';
 import FavoriteSportPage from './pages/FavoriteSportPage';
 import { AuthContextWrapper } from "./context/Auth.context";
-import IsPrivate from "./components/IsPrivate"; // Import the IsPrivate component
+import IsPrivate from '../components/IsPrivate';
 import ProfilePage from './pages/ProfilePage';
 import CommunityPage from './pages/CommunityPage';
 
