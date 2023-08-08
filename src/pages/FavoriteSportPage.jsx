@@ -45,8 +45,8 @@ const SportsPage = () => {
 
   
         <div className="sport-list">
-          {userSports.map(( sport) => (
-            <div key={sport._id} className="sport-card">
+          {userSports.map(({sport,_id} ) => (
+            <div key={_id} className="sport-card">
               <h3>Sport: {sport.name}</h3>
               <p>Location: {sport.location}</p>
               <p>Venue: {sport.venue}</p>
@@ -57,7 +57,7 @@ const SportsPage = () => {
               <p>Comments {sport.comments}</p>
               <div className="heart-icon">
                 <FontAwesomeIcon icon={solidHeart} style={{ color: 'red', fontSize: '20px' }} />
-                <button onClick={() => handleDeleteFavorite(sport._id)}>Delete</button>
+                <button onClick={() => handleDeleteFavorite(_id)}>Delete</button>
               </div>
             </div>
           ))}
