@@ -26,7 +26,7 @@ const SportsPage = () => {
 
   const handleDeleteFavorite = async (favoriteId) => {
     try {
-      await axios.delete(`http://localhost:5005/favorites/${favoriteId}/removefavorite/${user}`);
+      await axios.delete(`${API_URL}/favorites/${favoriteId}/removefavorite/${user}`);   
       fetchUserSports();
     } catch (error) {
       console.error('Error:', error);
