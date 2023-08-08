@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import NavBarAdmin from '../components/NavBarAdmin';
+import {API_URL} from '../config/config.index';
 
 const SportsPage = () => {
   const { user } = useParams();
@@ -15,7 +16,7 @@ const SportsPage = () => {
 
   const fetchUserSports = async () => {
     try {
-      const response = await axios.get(`http://localhost:5005/favorites/${user}`);
+      const response = await axios.get( `${API_URL}/favorites/${user}`);   
       setUserSports(response.data);
       console.log(response.data);
     } catch (error) {

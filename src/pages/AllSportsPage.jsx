@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import NavBarAdmin from '../components/NavBarAdmin'; 
 import Sidebar from "../components/Sidebar";
+import {API_URL} from '../config/config.index';
 
 const AllSportsPage = () => {
   const [sports, setSports] = useState([]);
@@ -10,7 +11,7 @@ const AllSportsPage = () => {
 
   async function fetchSports() {
     try {
-      const response = await axios.get("http://localhost:5005/sports");
+      const response = await axios.get(`${API_URL}/sports`);    
       if (response.status === 200) {
         setSports(response.data.sports);
       }
