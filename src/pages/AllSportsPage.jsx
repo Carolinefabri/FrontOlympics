@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import NavBarAdmin from '../components/NavBarAdmin'; 
 import Sidebar from "../components/Sidebar";
+import {API_URL} from '../config/config.index';
 
 const AllSportsPage = () => {
   const [sports, setSports] = useState([]);
