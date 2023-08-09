@@ -22,7 +22,7 @@ color:white;
 
   .NavBar {
     background-color: #033f68;
-    height: 3rem;
+    height: 5rem;
     display: flex;
     align-items:center;
     justify-content:right;
@@ -70,15 +70,11 @@ color:white;
 /* Estilos para o footer */
 .Footer-class {
   background-color: #033f68;
-  color:white;
-  height: 5rem;
-  display: flex;
-  align-items:center;
-  justify-content:center;
-  /* Alterado para "center" para centralizar horizontalmente */
-  width: 100%; /* Defina a largura do footer */
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  margin-top: 200%;
 }
-
 
 
 .home-container {
@@ -103,7 +99,7 @@ color:white;
 }
 
 
-.register {
+.shake-top {
   padding: 10px 50px;
   color: rgb(0, 0, 0);
   text-decoration: none;
@@ -111,15 +107,16 @@ color:white;
   transition: all .3s ease-in-out;
   opacity: 0.8;
   margin-left: 8rem;
-  margin-top:  31rem;
+  margin-top:  29rem;
 }
-.register:hover {
-    background-color: #F88932;
+.shake-top:hover {
+    background-color: #ddd9d5;
     cursor: pointer;
-
   }
   
-
+  .shake-top{-webkit-animation:shake-top .8s cubic-bezier(.455,.03,.515,.955) both;animation:shake-top .8s cubic-bezier(.455,.03,.515,.955) both}
+  @-webkit-keyframes shake-top{0%,100%{-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-transform-origin:50% 0;transform-origin:50% 0}10%{-webkit-transform:rotate(2deg);transform:rotate(2deg)}20%,40%,60%{-webkit-transform:rotate(-4deg);transform:rotate(-4deg)}30%,50%,70%{-webkit-transform:rotate(4deg);transform:rotate(4deg)}80%{-webkit-transform:rotate(-2deg);transform:rotate(-2deg)}90%{-webkit-transform:rotate(2deg);transform:rotate(2deg)}}@keyframes shake-top{0%,100%{-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-transform-origin:50% 0;transform-origin:50% 0}10%{-webkit-transform:rotate(2deg);transform:rotate(2deg)}20%,40%,60%{-webkit-transform:rotate(-4deg);transform:rotate(-4deg)}30%,50%,70%{-webkit-transform:rotate(4deg);transform:rotate(4deg)}80%{-webkit-transform:rotate(-2deg);transform:rotate(-2deg)}90%{-webkit-transform:rotate(2deg);transform:rotate(2deg)}}
+  
   .serviceshome {
     background-size:cover;
     background-position: center center;
@@ -162,7 +159,7 @@ color:white;
     width: 100%;
     height:100%;
     position:absolute;
-    margin-top: 111%;
+    margin-top: 113%;
     border-radius: 0px 0 10px 10px
   }
   
@@ -277,13 +274,16 @@ button:hover {
 
   }
 
+  .scale-in-hor-center{-webkit-animation:scale-in-hor-center .5s cubic-bezier(.25,.46,.45,.94) both;animation:scale-in-hor-center .5s cubic-bezier(.25,.46,.45,.94) both}
+  @-webkit-keyframes scale-in-hor-center{0%{-webkit-transform:scaleX(0);transform:scaleX(0);opacity:1}100%{-webkit-transform:scaleX(1);transform:scaleX(1);opacity:1}}@keyframes scale-in-hor-center{0%{-webkit-transform:scaleX(0);transform:scaleX(0);opacity:1}100%{-webkit-transform:scaleX(1);transform:scaleX(1);opacity:1}}
+
   .allsports-image {
   background-position:center center;
   background-repeat: no-repeat;
   width:100%;
   height: 30vh;
   position:absolute;
-  top:5.5rem; /* Define a distância entre a barra de navegação e a imagem */
+  top:4rem; /* Define a distância entre a barra de navegação e a imagem */
   border-radius: 0px 0 0px 0px;
 }
 
@@ -292,7 +292,7 @@ button:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between; /* Distribui os itens igualmente nas colunas */
-    margin-top: 13rem;
+    margin-top:4rem;
 
   }
   
@@ -300,7 +300,6 @@ button:hover {
     width: calc(25% - 20px); /* 3 colunas com espaçamento */
     margin: 10px 0;
     padding: 10px;
-    border:100px solid #07015f;
     text-align: center;
     text-decoration: none !important;
     box-sizing: border-box; 
@@ -308,6 +307,7 @@ button:hover {
     background: linear-gradient(135deg, rgba(4, 45, 99, 0.8), rgba(194, 92, 92, 0.8)); /* Gradiente de cores */
     position: relative;
     z-index: 1;
+    
   
   }
   
@@ -328,29 +328,77 @@ button:hover {
   color: rgb(3, 0, 0);
 }
 
-/*sportdetails */
+/* Details */
 
- .sport-card-details {
-      background-color: #ced6de;
-    width: calc(60% - 20px); /* 3 colunas com espaçamento */
-    margin: 10px 0;
-    padding: 10px;
-    border:10px solid #f15151;
-    text-align: center;
-    text-decoration: none !important;
-    box-sizing: border-box; 
-    border-radius: 50px 50px 50px 50px;
-    background: linear-gradient(135deg, rgba(4, 45, 99, 0.8), rgba(194, 92, 92, 0.8)); /* Gradiente de cores */
-    position: relative;
-    z-index: 1;
-  
-  }
-  
-  .sport-image-details {
-  width: 100px;
-  height: 100px;
+.backgroundDetails {
+  display: flex;
+  justify-content:center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  background-color: #ced6de;
+  position: relative;
+  height: 200vh; /* Define a altura total da tela */
+}
+
+.sport-carddetails {
+  background-color: #ced6de;
+  width: calc(55% - 10px);
+  height: calc(40% - 10px);
+  margin: 50px 0;
+  padding: 30px;
+  text-align:left;
+  box-sizing: border-box;
+  border-radius: 50px;
+  background: linear-gradient(135deg, rgba(4, 45, 99, 0.8), rgba(194, 92, 92, 0.8));
+  position: relative;
+  z-index: 1;
+  margin-top: -39rem;
+}
+
+.sport-carddetails h1 {
+  margin: 0; /* Remove margens padrão */
+  padding:0px 0; /* Adicione um espaçamento interno ao redor do h1 */
+}
+
+.sport-cardcontent {
+  display: flex; /* Cria uma coluna dentro do card */
+}
+
+.sport-image-details {
+  width: 330px;
+  height: 350px;
   object-fit: cover;
-  margin: 10px;
-  margin-bottom: 10px;
-  border-radius: 0px 0px 50px 50px;
+  margin-right: 10px; /* Adiciona um espaçamento à direita da imagem */
+  border-radius: 50px;
+}
+
+.sport-info {
+  text-align:center; /* Alinha as informações à esquerda */
+  margin-left:2rem;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Centraliza os botões horizontalmente */
+  margin-top: -5rem;
+  margin-left:20rem;
+}
+
+.roll-in-left{-webkit-animation:roll-in-left .6s ease-out both;animation:roll-in-left .6s ease-out both}
+
+@-webkit-keyframes roll-in-left{0%{-webkit-transform:translateX(-800px) rotate(-540deg);transform:translateX(-800px) rotate(-540deg);opacity:0}100%{-webkit-transform:translateX(0) rotate(0deg);transform:translateX(0) rotate(0deg);opacity:1}}@keyframes roll-in-left{0%{-webkit-transform:translateX(-800px) rotate(-540deg);transform:translateX(-800px) rotate(-540deg);opacity:0}100%{-webkit-transform:translateX(0) rotate(0deg);transform:translateX(0) rotate(0deg);opacity:1}}
+
+
+.acomodacao{
+  display: flex;
+  justify-content: center; /* Centraliza os botões horizontalmente */
+  margin-left:20rem;
+}
+
+
+.acomodacao1{
+  display: flex;
+  justify-content: center; /* Centraliza os botões horizontalmente */
+  margin-left:20rem;
+  margin-top: -1rem;
+  color:#033f68
 }
