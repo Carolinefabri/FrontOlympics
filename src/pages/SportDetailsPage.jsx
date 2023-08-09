@@ -10,10 +10,11 @@ import {API_URL} from '../config/config.index';
 
 const SportDetailsPage = () => {
   const { id } = useParams();
+
   const [sport, setSport] = useState(null);
   const [currentTemperature, setCurrentTemperature] = useState(null);
   const [eventTemperature, setEventTemperature] = useState(null);
-  const [commentText, setCommentText] = useState('');
+ 
   const [isFavorited, setIsFavorited] = useState(false);
 
   const navigate = useNavigate();
@@ -118,20 +119,7 @@ const SportDetailsPage = () => {
       return null;
     }
   };
-  const handleSubmitComment = async () => {
-    try {
-      const response = await axios.post(`/favorites/${id}/comments`, { text: commentText });
-      // Atualize o estado com o novo comentário
-      setSport((prevSport) => ({
-        ...prevSport,
-        comments: [...prevSport.comments, response.data],
-      }));
-      // Limpe o campo de texto do comentário
-      setCommentText('');
-    } catch (error) {
-      console.error('Error submitting comment:', error);
-    }
-  };
+  
 
   return sport ? (
     <div><NavBarAdmin />
@@ -144,14 +132,7 @@ const SportDetailsPage = () => {
       <h3>Location: {sport[0].location}</h3>
       <h4>Venue: {sport[0].venue}</h4>
       <h4>Date: {sport[0].date}</h4>
-      <div className="comment-form">
-  <textarea
-    value={commentText}
-    onChange={(e) => setCommentText(e.target.value)}
-    placeholder="Write a comment..."
-  />
-  <button onClick={handleSubmitComment}>Submit</button>
-</div>
+      
 
       {/* Display current temperature if available */}
       {currentTemperature && <p>Current Temperature: {currentTemperature} °C</p>}

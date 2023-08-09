@@ -6,14 +6,33 @@ import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import NavBarAdmin from '../components/NavBarAdmin';
 import {API_URL} from '../config/config.index';
 
+
 const SportsPage = () => {
   const { user } = useParams();
   const [userSports, setUserSports] = useState([]);
+  const [commentText, setCommentText] = useState('');
 
 
   useEffect(() => {
     fetchUserSports();
   }, []);
+
+
+  const handleSubmitComment = async () => {
+    try {
+      console.log(sport)
+      const response = await axios.post(`${API_URL}/favorites/${id}/comments`, { text: commentText });
+      // Atualize o estado com o novo comentário
+      setSport((prevSport) => ({
+        ...prevSport,
+        comments: [...prevSport.comments, response.data],
+      }));
+      // Limpe o campo de texto do comentário
+      setCommentText('');
+    } catch (error) {
+      console.error('Error submitting comment:', error);
+    }
+  };
 
   const fetchUserSports = async () => {
     try {
@@ -54,12 +73,25 @@ const SportsPage = () => {
               <div className="sport-image-container">
               <img src={sport.image} className="sport-image" alt={sport.name} />
             </div>
+
+            <div className="comment-form">
+  <textarea
+    value={commentText}
+    onChange={(e) => setCommentText(e.target.value)}
+    placeholder="Write a comment..."
+  />
+  <button onClick={handleSubmitComment}>Submit</button>
+</div>
+
+
               <p>Comments {sport.comments}</p>
+              
               <div className="heart-icon">
                 <FontAwesomeIcon icon={solidHeart} style={{ color: 'red', fontSize: '20px' }} />
                 <button onClick={() => handleDeleteFavorite(_id)}>Delete</button>
               </div>
             </div>
+            
           ))}
         </div>
       </div>
