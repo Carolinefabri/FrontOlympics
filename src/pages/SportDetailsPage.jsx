@@ -4,7 +4,6 @@ import { fetchSport } from '../utils/sportsAPICall';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
-import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 import NavBarAdmin from '../components/NavBarAdmin';
 import {API_URL} from '../config/config.index';
 
@@ -18,6 +17,9 @@ const SportDetailsPage = () => {
   const [isFavorited, setIsFavorited] = useState(false);
 
   const navigate = useNavigate();
+
+ 
+  
 
   const handleToggleFavorite = () => {
     setIsFavorited((prevState) => !prevState);
@@ -107,8 +109,8 @@ const SportDetailsPage = () => {
     try {
       const user = localStorage.getItem("user")
       console.log(user)
-      const response = await axios.get(`${API_URL}/user/favorites/${id}/addfavorite/${user}`)  
-      handleToggleFavorite();  
+      const response = await axios.get(`${API_URL}/favorites/${id}/addfavorite/${user}`)  
+      handleToggleFavorite()  
       navigate(`/favorites/${user}`)
       
     }

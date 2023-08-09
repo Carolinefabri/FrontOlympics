@@ -61,7 +61,7 @@ const SportsPage = () => {
       console.error('Error:', error);
     }
   };
-   console.log(userSports)
+   console.log(user)
   return userSports !== null ? (
     <div>
       <NavBarAdmin />

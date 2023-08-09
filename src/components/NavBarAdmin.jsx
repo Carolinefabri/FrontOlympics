@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import "../App.css";
+import { useContext } from "react";
+import { AuthContext } from "../context/Auth.context";
+
 const NavbarAdmin = () => {
+  const { user } = useContext(AuthContext);
     const location = useLocation();
   
     return (
@@ -10,9 +14,11 @@ const NavbarAdmin = () => {
       {location.pathname !== '/admin' && (
             <li><Link to="/admin">Admin</Link></li>
           )}
-          {location.pathname !== '/favorites/64d20eb44a606b49bc394f01' && (
-            <li><Link to="/favorites/64d20eb44a606b49bc394f01">Favorites</Link></li>
-          )}
+          { user && location.pathname !== `/favorites${user._id}` && (
+                <li>
+                  <Link to={`/favorites/${user._id}`}>Favorites</Link>
+                </li>
+              )}
            {location.pathname !== '/allsports' && (
             <li><Link to="/allsports">All Sports</Link></li>
           )}

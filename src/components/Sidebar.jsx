@@ -2,16 +2,13 @@ import "../App.css";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Drawer } from "@mui/material";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/Auth.context";
 import { useContext } from "react";
 import {
-  Divider,
   ListItem,
   ListItemButton,
   ListItemIcon,
@@ -56,7 +53,7 @@ const Sidebar = () => {
         {menuItems.map((text, index) => (
           <Link
             to={
-              index %  2=== 0
+              index % 2 === 0
                 ? "/Profile"
                 : index === 1
                 ? "/community"
@@ -74,7 +71,7 @@ const Sidebar = () => {
                   ) : index % 3 === 1 ? (
                     <PeopleAltOutlinedIcon />
                   ) : index % 3 === 2 ? (
-                    <LogoutOutlinedIcon/>
+                    <LogoutOutlinedIcon />
                   ) : null}
                 </ListItemIcon>
 
@@ -90,26 +87,31 @@ const Sidebar = () => {
   return (
     <nav className="Sidebar">
       <React.Fragment key="right">
-        {user && <span>{user.userName}</span>}
-        <ul>
-          {location.pathname !== "/favorites/64d20eb44a606b49bc394f01" && (
-            <li>
-              <Link to="/favorites/64d20eb44a606b49bc394f01">Favorites</Link>
-            </li>
-          )}
-        </ul>
-        <Button onClick={toggleDrawer("right", true)}>
-          <Box
-            component="img"
-            sx={{
-              borderRadius: "50%",
-              height: 56,
-              width: 56,
-            }}
-            alt="The house from the offer."
-            src={user && <image>{user.image}</image>}
-          />
-        </Button>
+        {user && (
+          <>
+            <span>{user.userName}</span>
+            <ul>
+              {location.pathname !== `/favorites${user._id}` && (
+                <li>
+                  <Link to={`/favorites/${user._id}`}>Favorites</Link>
+                </li>
+              )}
+            </ul>
+            <Button onClick={toggleDrawer("right", true)}>
+              <Box
+                component="img"
+                sx={{
+                  borderRadius: "50%",
+                  height: 56,
+                  width: 56,
+                }}
+                alt="The house from the offer."
+                src={user.image}
+              />
+            </Button>
+          </>
+        )}
+
         <Drawer
           anchor="right"
           open={state["right"]}
