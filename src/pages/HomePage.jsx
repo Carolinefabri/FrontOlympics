@@ -14,7 +14,7 @@ const HomePage = () => {
     <div className="home-container">
       <NavBar />
       <div className="image-container">
-        <img className="homephoto" src="./public/images/home.png" alt="homepage" />
+        <img className="homephoto" src="../public/images/home.png" alt="homepage" />
         <button className="register" onClick={handleGetStarted} >
           <strong>JOIN NOW</strong>
         </button>
