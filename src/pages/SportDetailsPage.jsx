@@ -6,37 +6,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import NavBarAdmin from "../components/NavBarAdmin";
+import { API_URL } from "../config/config.index";
 
 const SportDetailsPage = () => {
   const { id } = useParams();
+
   const [sport, setSport] = useState(null);
   const [currentTemperature, setCurrentTemperature] = useState(null);
   const [eventTemperature, setEventTemperature] = useState(null);
 
-  const navigate = useNavigate();
-
-  const [commentText, setCommentText] = useState("");
-
-  const handleWriteComment = async () => {
-    try {
-      const response = await axios.post(
-        `http://localhost:5005/favorites/${id}/comments`,
-        {
-          text: commentText,
-        }
-      );
-      // Atualizar o esporte com o novo comentário
-      setSport((prevSport) => ({
-        ...prevSport,
-        comments: [...prevSport.comments, response.data],
-      }));
-      setCommentText(""); // Limpar o campo de texto do comentário
-    } catch (error) {
-      console.error("Error writing comment:", error);
-    }
-  };
-
   const [isFavorited, setIsFavorited] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleToggleFavorite = () => {
     setIsFavorited((prevState) => !prevState);
@@ -134,7 +115,7 @@ const SportDetailsPage = () => {
       const user = localStorage.getItem("user");
       console.log(user);
       const response = await axios.get(
-        `http://localhost:5005/favorites/${id}/addfavorite/${user}`
+        `${API_URL}/favorites/${id}/addfavorite/${user}`
       );
       navigate(`/favorites/${user}`);
     } catch (error) {
@@ -155,6 +136,7 @@ const SportDetailsPage = () => {
         <h3>Location: {sport[0].location}</h3>
         <h4>Venue: {sport[0].venue}</h4>
         <h4>Date: {sport[0].date}</h4>
+
         {/* Display current temperature if available */}
         {currentTemperature && (
           <p>Current Temperature: {currentTemperature} °C</p>
@@ -171,29 +153,18 @@ const SportDetailsPage = () => {
             style={{ color: "red" }}
           />
         </button>
-        <h4>Comments:</h4>
-        {sport.comments &&
-          sport.comments.map((comment) => (
-            <p key={comment._id}>{comment.text}</p>
-          ))}
-        {/* Formulário para escrever um novo comentário */}
-        <textarea
-          rows="3"
-          placeholder="Write a comment..."
-          value={commentText}
-          onChange={(e) => setCommentText(e.target.value)}
-        />
-        <button onClick={handleWriteComment}>Add Comment</button>
+
+        {/* Add the link to check hotels in a specific region */}
+
+        <p>Don't have an accommodation yet?</p>
+        <a
+          href="https://www.trivago.pt/pt/lm/hoteis-paris-franca?search=200-22235;dr-20230817-20230818"
+          target="_blank" // Para abrir o link em uma nova aba
+          rel="noopener noreferrer" // Recomendado por motivos de segurança
+        >
+          <p>Check out our partners</p>
+        </a>
       </div>
-      {/* Add the link to check hotels in a specific region */}
-      <p>Don't have an accommodation yet?</p>
-      <a
-        href="https://www.trivago.pt/pt/lm/hoteis-paris-franca?search=200-22235;dr-20230817-20230818"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <p>Check out our partners</p>
-      </a>
     </div>
   ) : (
     <h1>Loading...</h1>
