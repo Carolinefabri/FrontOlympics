@@ -1,5 +1,7 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import {API_URL} from '../config/config.index';
+
 
 const AuthContext = createContext();
 
@@ -12,7 +14,7 @@ const AuthContextWrapper = (props) => {
     const gotToken = localStorage.getItem("authToken");
     if (gotToken) {
       try {
-        const { data } = await axios.get("http://localhost:5005/user/verify", {
+        const { data } = await axios.get( `${API_URL}/user/verify`, {  
           headers: { authorization: `Bearer ${gotToken}` },
         });
         console.log("response from verify route", data);

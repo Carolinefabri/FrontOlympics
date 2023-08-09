@@ -9,10 +9,9 @@ import AdminPage from './pages/AdminPage';
 import AllSportsPage from './pages/AllSportsPage';
 import SportDetailsPage from './pages/SportDetailsPage';
 import FavoriteSportPage from './pages/FavoriteSportPage';
-import { AuthContextWrapper } from "./context/Auth.context";
-import IsPrivate from "./components/IsPrivate"; // Import the IsPrivate component
 import ProfilePage from './pages/ProfilePage';
 import CommunityPage from './pages/CommunityPage';
+import IsPrivate from './components/IsPrivate';
 
 function App() {
   return (
@@ -23,7 +22,10 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LogInPage />} />
         {/* Wrap the protected routes with IsPrivate component */}
-        <Route path="/admin" element={<IsPrivate><AdminPage/></IsPrivate>} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/allsports" element={<AllSportsPage />} />
+        <Route path="/allsports/:id" element={<IsPrivate><SportDetailsPage /></IsPrivate>} />
+    
         <Route path="/favorites/:user" element={<FavoriteSportPage />} />
         <Route path="/allsports" element={<AllSportsPage />} />
         <Route path="/allsports/:id"  element={<SportDetailsPage />} />
