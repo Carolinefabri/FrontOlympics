@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from '../config/config.index';
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -19,7 +20,7 @@ function SignUp() {
     formData.append("profilePicture", profilePicture);
 
     try {
-      const res = await axios.post("http://localhost:5005/auth/signup", formData, {
+      const res = await axios.post(`${API_URL}/auth/signup`, formData, {   
         headers: {
           "Content-Type": "multipart/form-data",
         },

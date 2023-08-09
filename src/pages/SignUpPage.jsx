@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import NavBar from '../components/NavBar';
+import {API_URL} from '../config/config.index';
+
+
+
+
 const SignUp = () => {
   const [formData, setFormData] = useState({
     userName: "",
@@ -39,7 +44,9 @@ const SignUp = () => {
       formDataToSend.append("profilePicture", profilePicture);
 
       const response = await axios.post(
-        "http://localhost:5005/user/signup",
+        
+        `${API_URL}/user/signup`,
+
         formDataToSend
       );
       console.log(response.data);
