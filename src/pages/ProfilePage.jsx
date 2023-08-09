@@ -46,7 +46,7 @@ const UserProfile = ({ user }) => {
         },
       };
 
-      const url = `{API_URL}/user/edit/${user._id}`;
+      const url = `http://localhost:5005/user/edit/${user._id}`;
       const response = await axios.post(
         url,
         { userName: username, email: email, password: password, image: image },
@@ -77,7 +77,7 @@ const UserProfile = ({ user }) => {
       };
 
       await axios.delete(
-        `{API_URL}/user/delete/${user._id}`,
+        `http://localhost:5005/user/delete/${user._id}`,
         config
       );
       nav("/");

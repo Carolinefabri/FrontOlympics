@@ -56,7 +56,7 @@ const Sidebar = () => {
         {menuItems.map((text, index) => (
           <Link
             to={
-              index === 0
+              index %  2=== 0
                 ? "/Profile"
                 : index === 1
                 ? "/community"
@@ -69,12 +69,12 @@ const Sidebar = () => {
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 3 === 0 ? (
+                  {index % 2 === 0 ? (
                     <ManageAccountsOutlinedIcon />
                   ) : index % 3 === 1 ? (
                     <PeopleAltOutlinedIcon />
                   ) : index % 3 === 2 ? (
-                    <LogoutOutlinedIcon />
+                    <LogoutOutlinedIcon/>
                   ) : null}
                 </ListItemIcon>
 
