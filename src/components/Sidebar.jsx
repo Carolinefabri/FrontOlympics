@@ -2,15 +2,15 @@ import "../App.css";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Drawer } from "@mui/material";
-import axios from 'axios';
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/Auth.context";
+import { useContext } from "react";
 import {
-  Avatar,
   Divider,
   ListItem,
   ListItemButton,
@@ -22,6 +22,7 @@ import {
 } from "@mui/material/";
 
 const Sidebar = () => {
+  const { user } = useContext(AuthContext);
   const location = useLocation();
   const [state, setState] = useState({
     left: false,
@@ -41,13 +42,7 @@ const Sidebar = () => {
     setState({ ...state, [anchor]: open });
   };
 
-  const menuItems = [
-    "All Sports",
-    "Profile",
-    "Favorites",
-    "Community",
-    "Logout",
-  ];
+  const menuItems = ["Profile", "Community", "Logout"];
 
   const list = (anchor) => (
     <Box
@@ -57,37 +52,30 @@ const Sidebar = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
+        {user && <p>{user.userName}</p>}
         {menuItems.map((text, index) => (
           <Link
             to={
               index === 0
-                ? "/AllSports"
-                : index === 1
                 ? "/Profile"
-                : index === 2
-                ? "/favorites"
-                : index === 3
+                : index === 1
                 ? "/community"
+                : index === 2
+                ? "/"
                 : "/"
             }
+            key={text}
           >
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 5 === 0 ? (
-                    <HomeOutlinedIcon />
-                  ) : index % 5 === 1 ? (
+                  {index % 3 === 0 ? (
                     <ManageAccountsOutlinedIcon />
-                  ) : index % 5 === 2 ? (
-                    <FavoriteBorderOutlinedIcon />
-                  ) : index % 5 === 3 ? (
-                    <>
-                      <PeopleAltOutlinedIcon />
-                      <Divider />
-                    </>
-                  ) : (
+                  ) : index % 3 === 1 ? (
+                    <PeopleAltOutlinedIcon />
+                  ) : index % 3 === 2 ? (
                     <LogoutOutlinedIcon />
-                  )}
+                  ) : null}
                 </ListItemIcon>
 
                 <ListItemText primary={text} />
@@ -102,11 +90,24 @@ const Sidebar = () => {
   return (
     <nav className="Sidebar">
       <React.Fragment key="right">
+        {user && <span>{user.userName}</span>}
+        <ul>
+          {location.pathname !== "/favorites/64d20eb44a606b49bc394f01" && (
+            <li>
+              <Link to="/favorites/64d20eb44a606b49bc394f01">Favorites</Link>
+            </li>
+          )}
+        </ul>
         <Button onClick={toggleDrawer("right", true)}>
-          <Avatar
-            sx={{ width: 56, height: 56 }}
-            alt="Remy Sharp"
-            src="/static/images/avatar"
+          <Box
+            component="img"
+            sx={{
+              borderRadius: "50%",
+              height: 56,
+              width: 56,
+            }}
+            alt="The house from the offer."
+            src={user && <image>{user.image}</image>}
           />
         </Button>
         <Drawer
