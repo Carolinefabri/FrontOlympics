@@ -41,6 +41,20 @@ SportSoul is designed to be the ultimate companion for sports enthusiasts who ar
   ![Logo do SportSoul](/public/images/3.png)
 
 
+## Contributing
+
+We welcome contributions to enhance **SportSoul**! If you'd like to contribute, please refer to our contribution guidelines before submitting a pull request.
+
+## Contact
+If you have any questions or suggestions, please feel free to contact the **SportSoul** maintainers:
+
+### Project Maintainer
+
+carolinefabri.dev@hotmail.com  / priscillariese.dev@gmail.com / brianadamsmaino68@gmail.com
+
+### License
+**SportSoul** is licensed under the MIT License. Enjoy exploring the world of Olympic sports with SportSoul!
+
   
 
   
