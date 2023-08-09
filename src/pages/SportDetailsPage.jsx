@@ -143,20 +143,20 @@ const SportDetailsPage = () => {
       <button onClick={handleAddtofavorite}>
         <FontAwesomeIcon icon={isFavorited ? solidHeart : regularHeart} style={{ color: 'red' }} />
       </button>
-      <button onClick={ handleAddtofavorite}>Favorites</button>
+  
       
             {/* Add the link to check hotels in a specific region */}
           
           <p>Don't have an accommodation yet?</p>
             <a
           href="https://www.trivago.pt/pt/lm/hoteis-paris-franca?search=200-22235;dr-20230817-20230818"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <p>Check out our partners</p>
-        </a>
-      </div>
-    
+          target="_blank"  // Para abrir o link em uma nova aba
+          rel="noopener noreferrer"  // Recomendado por motivos de segurança
+>
+  <p>Check out our partners</p>
+</a>
+</div>
+    </div>
   ) : (
     <h1>Loading...</h1>
   );
