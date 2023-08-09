@@ -19,9 +19,6 @@ const SportDetailsPage = () => {
 
   const navigate = useNavigate();
 
- 
-  
-
   const handleToggleFavorite = () => {
     setIsFavorited((prevState) => !prevState);
   };
@@ -110,7 +107,8 @@ const SportDetailsPage = () => {
     try {
       const user = localStorage.getItem("user")
       console.log(user)
-      const response = await axios.get(`${API_URL}/favorites/${id}/addfavorite/${user}`)    
+      const response = await axios.get(`${API_URL}/user/favorites/${id}/addfavorite/${user}`)  
+      handleToggleFavorite();  
       navigate(`/favorites/${user}`)
       
     }

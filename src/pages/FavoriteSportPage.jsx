@@ -61,8 +61,8 @@ const SportsPage = () => {
       console.error('Error:', error);
     }
   };
-
-  return userSports ? (
+   console.log(userSports)
+  return userSports !== null ? (
     <div>
       <NavBarAdmin />
       <div className="sport-container">
