@@ -25,10 +25,8 @@ function App() {
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/allsports" element={<AllSportsPage />} />
         <Route path="/allsports/:id" element={<IsPrivate><SportDetailsPage /></IsPrivate>} />
-    
-        <Route path="/favorites/:user" element={<FavoriteSportPage />} />
-        <Route path="/allsports" element={<AllSportsPage />} />
-        <Route path="/allsports/:id"  element={<SportDetailsPage />} />
+         <Route path="/favorites/:user" element={<FavoriteSportPage />} />
+         <Route path="/favorites" element={<FavoriteSportPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/community" element={<CommunityPage />} />
         
