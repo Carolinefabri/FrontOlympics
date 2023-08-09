@@ -120,46 +120,53 @@ const SportDetailsPage = () => {
     }
   };
   
-
   return sport ? (
-    <div><NavBarAdmin />
-    <div className="sport-card">
-      <h1>Sport Details</h1>
-      <img src={sport[0].image} alt={sport[0].name} className="sport-image" />
-      <span>
-        <h2>{sport[0].name}</h2>
-      </span>
-      <h3>Location: {sport[0].location}</h3>
-      <h4>Venue: {sport[0].venue}</h4>
-      <h4>Date: {sport[0].date}</h4>
-      
-
-      {/* Display current temperature if available */}
-      {currentTemperature && <p>Current Temperature: {currentTemperature} °C</p>}
-      {/* Display temperature for event date if available */}
-      {eventTemperature && <p>Temperature on Event Day: {eventTemperature} °C</p>}
-      {/* Render other details */}
-      <button onClick={() => navigate('/allsports')}>All Sports</button>
-      <button onClick={handleAddtofavorite}>
-        <FontAwesomeIcon icon={isFavorited ? solidHeart : regularHeart} style={{ color: 'red' }} />
-      </button>
-  
-      
-            {/* Add the link to check hotels in a specific region */}
+    <div>
+      <NavBarAdmin />
+      <div className="backgroundDetails">
+   
+        <div className="sport-carddetails">
+        <div className="roll-in-left">
+          <div className="sport-cardcontent">
+            <div className="sport-image-container">
+              <img src={sport[0].image} alt={sport[0].name} className="sport-image-details" />
+            </div>
+            <div className="sport-info">
+              <h1>{sport[0].name}</h1>
+              <h3>Location: {sport[0].location}</h3>
+              <h4>Venue: {sport[0].venue}</h4>
+              <h4>Date: {sport[0].date}</h4>
+              {/* Display current temperature if available */}
+              {currentTemperature && <p>Current Temperature: {currentTemperature} °C</p>}
+              {/* Display temperature for event date if available */}
+              {eventTemperature && <p>Temperature on Event Day: {eventTemperature} °C</p>}
+            </div>
+          </div>
+          <div className="button-container">
+            <button onClick={() => navigate('/allsports')}>All Sports</button>
+            <span style={{ marginRight: '10px' }}></span>
+            <button className="heart" onClick={handleAddtofavorite}>
+              <FontAwesomeIcon icon={solidHeart} style={{ color: 'red', fontSize: '20px' }} />
+            </button>
+          </div>
+      {/* Add the link to check hotels in a specific region */}
           
-          <p>Don't have an accommodation yet?</p>
+      <p className="acomodacao"><strong>Don't have an accommodation yet?</strong></p>
             <a
           href="https://www.trivago.pt/pt/lm/hoteis-paris-franca?search=200-22235;dr-20230817-20230818"
           target="_blank"  // Para abrir o link em uma nova aba
-          rel="noopener noreferrer"  // Recomendado por motivos de segurança
+          rel="noopener noreferrer"  className="acomodacao1" // Recomendado por motivos de segurança
 >
-  <p>Check out our partners</p>
+  <p><strong>Check out our partners</strong></p>
 </a>
-</div>
+        </div>
+      </div>
+    </div>
     </div>
   ) : (
     <h1>Loading...</h1>
   );
+
 };
 
 export default SportDetailsPage;

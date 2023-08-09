@@ -29,7 +29,10 @@ const AllSportsPage = () => {
   return (
     <div className="backgroundAllSports">
       <Sidebar />
-      <img className="allsports-image" src="../images/allsport.jpg" alt="homepage" />
+  
+    <h1 style={{ textAlign: 'center', margin: '20px 0' }}>ALL SPORTS</h1>
+    <h3 style={{ textAlign: 'center', margin: '10px 0' }}>Game time. Choose your adventure!</h3>
+   <div className="scale-in-hor-center">
       <div className="all-sports">
         {sports.map((sport) => (
           <div
@@ -46,8 +49,10 @@ const AllSportsPage = () => {
               <span className="sport-name">{sport.name}</span>
             </Link>
           </div>
+      
         ))}
       </div>
+    </div>
     </div>
   );
 };
