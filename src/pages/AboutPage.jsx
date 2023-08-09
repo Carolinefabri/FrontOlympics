@@ -8,7 +8,7 @@ const About = () => {
   return (
       <div>
     <NavBar />
-    <img className="aboutphoto" src="../images/about.jpg" alt="aboutit"></img>
+    <img className="aboutphoto" src="../images/about.png" alt="aboutit"></img>
     <Footer />
    
     </div>
