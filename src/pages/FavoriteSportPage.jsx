@@ -11,6 +11,8 @@ const SportsPage = () => {
   const { user } = useParams();
   const [userSports, setUserSports] = useState([]);
   const [commentText, setCommentText] = useState('');
+ 
+
 
 
   useEffect(() => {
@@ -18,16 +20,17 @@ const SportsPage = () => {
   }, []);
 
 
-  const handleSubmitComment = async () => {
+  const handleSubmitComment = async (id) => {
     try {
-      console.log(sport)
+     console.log(id)
       const response = await axios.post(`${API_URL}/favorites/${id}/comments`, { text: commentText });
       // Atualize o estado com o novo comentário
-      setSport((prevSport) => ({
+     /* setSport((prevSport) => ({
         ...prevSport,
         comments: [...prevSport.comments, response.data],
-      }));
+      })); */
       // Limpe o campo de texto do comentário
+      fetchUserSports();
       setCommentText('');
     } catch (error) {
       console.error('Error submitting comment:', error);
@@ -64,7 +67,7 @@ const SportsPage = () => {
 
   
         <div className="sport-list">
-          {userSports.map(({sport,_id} ) => (
+          {userSports.map(({sport,_id,comments} ) => (
             <div key={_id} className="sport-card">
               <h3>Sport: {sport.name}</h3>
               <p>Location: {sport.location}</p>
@@ -80,11 +83,14 @@ const SportsPage = () => {
     onChange={(e) => setCommentText(e.target.value)}
     placeholder="Write a comment..."
   />
-  <button onClick={handleSubmitComment}>Submit</button>
+  <button onClick={()=> handleSubmitComment(_id)}>Submit</button>
 </div>
 
 
-              <p>Comments {sport.comments}</p>
+              <p>Comments</p>
+              {comments.map(comment =>{
+                return (<p key={comment._id}>{comment.text}</p>)
+              })}
               
               <div className="heart-icon">
                 <FontAwesomeIcon icon={solidHeart} style={{ color: 'red', fontSize: '20px' }} />
