@@ -11,6 +11,8 @@ const SportsPage = () => {
   const { user } = useParams();
   const [userSports, setUserSports] = useState([]);
   const [commentText, setCommentText] = useState('');
+  const [updatingCommentId, setUpdatingCommentId] = useState(null);
+
  
 
 
@@ -47,6 +49,22 @@ const SportsPage = () => {
       console.error(error);
     }
   };
+
+
+  const handleUpdateComment = async (favoriteId, commentId) => {
+    try {
+      await axios.put(`${API_URL}/favorites/${favoriteId}/comments/${commentId}`, { text: commentText });
+      setUpdatingCommentId(null); 
+      fetchUserSports();
+      setCommentText('');
+    } catch (error) {
+      console.error('Error updating comment:', error);
+    }
+  };
+  
+
+
+
 
   const handleDeleteFavorite = async (favoriteId) => {
     try {
@@ -87,24 +105,39 @@ const SportsPage = () => {
 </div>
 
 
-              <p>Comments</p>
-              {comments.map(comment =>{
-                return (<p key={comment._id}>{comment.text}</p>)
-              })}
-              
+<p>Comments</p>
+              {comments.map((comment) => (
+                <div key={comment._id}>
+                  {updatingCommentId === comment._id ? (
+                    <div>
+                      <textarea
+                        value={commentText}
+                        onChange={(e) => setCommentText(e.target.value)}
+                        placeholder="Update your comment..."
+                      />
+                      <button onClick={() => handleUpdateComment(_id, comment._id)}>Update</button>
+                    </div>
+                  ) : (
+                    <div>
+                      <p>{comment.text}</p>
+                      <button onClick={() => setUpdatingCommentId(comment._id)}>Update</button>
+                    </div>
+                  )}
+                </div>
+              ))}
+
               <div className="heart-icon">
                 <FontAwesomeIcon icon={solidHeart} style={{ color: 'red', fontSize: '20px' }} />
                 <button onClick={() => handleDeleteFavorite(_id)}>Delete</button>
               </div>
             </div>
-            
           ))}
         </div>
       </div>
     </div>
-  ):
-  (<h1>Loading</h1>)
-  
+  ) : (
+    <h1>Loading</h1>
+  );
 };
 
 export default SportsPage;
