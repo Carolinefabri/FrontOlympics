@@ -96,7 +96,7 @@ const SignUp = () => {
         <img
           src={URL.createObjectURL(formData.profilePicture)}
           alt="Profile Picture"
-          style={{ width: "200px", height: "200px" }}
+          style={{ width: "200px", height: "200px", borderRadius: "50%;" }}
         />
       )}
       <button type="submit">Sign Up</button>

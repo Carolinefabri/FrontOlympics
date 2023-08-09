@@ -25,8 +25,7 @@ function LogIn() {
       localStorage.setItem("user", user._id); // Convert user object to string before saving
 
       // Redirect to a different page after successful login
-      nav('/allsports');
-
+      nav("/allsports");
     } catch (err) {
       console.log(err);
       setErrorMessage(err.response.data.error);
@@ -35,7 +34,7 @@ function LogIn() {
 
   return (
     <div>
-      <NavBar /> 
+      <NavBar />
       <div>
         <form onSubmit={handleLogin}>
           <label>

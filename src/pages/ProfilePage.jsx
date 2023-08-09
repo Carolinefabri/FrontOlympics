@@ -1,76 +1,97 @@
 import Sidebar from "../components/Sidebar";
-import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import Box from "@mui/material/Box";
-import Input from "@mui/material/Input";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
+import { Button, Stack } from "@mui/material";
+import { AuthContext } from "../context/Auth.context";
 import TextField from "@mui/material/TextField";
-import { Button, Avatar, Stack } from "@mui/material";
 
-const UserProfile = () => {
-  //Handle update account
-  const handleUpdate = () => {
+const UserProfile = ({ user }) => {
+  const [username, setUsername] = useState(user.userName);
+  const [email, setEmail] = useState(user.email);
+  const [password, setPassword] = useState("");
+  const [image, setImage] = useState(user.image);
+  console.log(user);
+
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    const newPassword = event.target.value.trim();
+    setPassword(newPassword);
+    setPassword(event.target.value);
+  };
+
+  const handleImageChange = (event) => {
+    const newImage = event.target.value.trim();
+    setImage(newImage);
+    setImage(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
     try {
-      console.log("Update account");
-
-      const userData = {
-        id: 1,
-        name: "John Doe",
-        email: "johndoe@example.com",
-        image: "image",
+      const token = localStorage.getItem("authToken");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       };
 
-      const cache = [];
+      const url = `http://localhost:5005/user/edit/${user._id}`;
+      const response = await axios.post(
+        url,
+        { userName: username, email: email, password: password, image: image },
+        config
+      );
 
-      const replacer = (key, value) => {
-        if (typeof value === "object" && value !== null) {
-          if (cache.includes(value)) {
-            return null;
-          }
-          cache.push(value);
-        }
-        return value;
-      };
-
-      const jsonString = JSON.stringify(userData, replacer);
-
-      console.log("API call successful.");
+      console.log("Account updated:", response.data);
     } catch (error) {
       console.error("An error occurred while updating the account:", error);
     }
   };
 
-  // Example usage:
-  handleUpdate();
-
   // Handle delete account
-  let userAccount = {
-    id: 1,
-    name: "John Doe",
-    email: "johndoe@example.com",
-    image: "image",
+  const nav = useNavigate();
+  const handleDelete = async () => {
+    try {
+      const token = localStorage.getItem("authToken");
+      console.log(token);
+      if (!token) {
+        console.error("No token found.");
+        return;
+      }
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      await axios.delete(
+        `http://localhost:5005/user/delete/${user._id}`,
+        config
+      );
+      nav("/");
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
-
-  const handleDelete = () => {
-    console.log("Delete account");
-
-    userAccount = null;
-
-    console.log("Account deleted successfully!");
-  };
-
-  handleDelete();
-
-  if (userAccount === null) {
-    console.log("Account has been deleted.");
-  } else {
-    console.log("Account still exists.");
-  }
 
   return (
     <div>
       <Sidebar />
+      <Stack direction="column">
+        <TextField disabled label={user && <p>{user.userName}</p>} />
+        <TextField disabled label={user && <p>{user.email}</p>} />
+      </Stack>
       <div
         style={{
           display: "flex",
@@ -79,50 +100,75 @@ const UserProfile = () => {
           height: "100vh",
         }}
       >
-        <Stack direction="column" spacing={2}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Avatar
-              alt="Remy Sharp"
-              src="/static/images/avatar/1.jpg"
-              sx={{ width: 56, height: 56 }}
-            />
+        <Stack direction="column">
+          <div>
+              <Box
+                component="img"
+                sx={{ borderRadius: "50%", height: 300, width: 300 }}
+                alt="User image"
+                src={user && <p>{user.image}</p>}
+              />
+            <br />
+            <form variant="standard" onSubmit={handleSubmit}>
+              <label>
+                Username:{" "}
+                <input
+                  type="text"
+                  value={username}
+                  onChange={handleUsernameChange}
+                />
+              </label>
+              <br />
+              <label>
+                Email:{" "}
+                <input
+                  type="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                />
+              </label>
+              <br />
+              <label>
+                Password:{" "}
+                <input
+                  type="password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                />
+              </label>
+              <br />
+              <label>
+                Profile Image:{" "}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                />
+              </label>
+              <br />
+              <Button variant="contained" type="submit">
+                {" "}
+                Update{" "}
+              </Button>
+              <br />
+              <Button variant="outlined" onClick={() => handleDelete(user._id)}>
+                {" "}
+                Delete Account{" "}
+              </Button>
+            </form>
           </div>
-          <Box sx={{ "& > :not(style)": { m: 1 } }}>
-            <TextField
-              id="input-with-icon-textfield"
-              label="Usuarname"
-              variant="standard"
-            />
-            <FormControl variant="standard">
-              <InputLabel htmlFor="input-with-icon-adornment">Email</InputLabel>
-              <Input id="input-with-icon-adornment" />
-            </FormControl>
-            <TextField
-              id="standard-password-input"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-              variant="standard"
-            />
-          </Box>
-          <FormControl variant="standard">
-            <Button variant="contained" onClick={handleUpdate}>
-              Update Account
-            </Button>
-          </FormControl>
-          <Button variant="outlined" onClick={handleDelete}>
-            Delete Account
-          </Button>
         </Stack>
       </div>
     </div>
   );
 };
 
-export default UserProfile;
+const LoadingWrapper = () => {
+  const { user } = useContext(AuthContext);
+  if (!user) {
+    return null;
+  }
+  return <UserProfile user={user} />;
+};
+
+export default LoadingWrapper;
