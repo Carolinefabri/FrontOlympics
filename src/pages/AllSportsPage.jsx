@@ -3,7 +3,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import NavBarAdmin from '../components/NavBarAdmin'; 
 import Sidebar from "../components/Sidebar";
-import {API_URL} from '../config/config.index';
 
 const AllSportsPage = () => {
   const [sports, setSports] = useState([]);
@@ -27,10 +26,10 @@ const AllSportsPage = () => {
   }, []);
 
   return (
-    <div>
+    <div className="backgroundAllSports">
       <Sidebar />
+      <img className="allsports-image" src="../images/allsport.jpg" alt="homepage" />
       <div className="all-sports">
-        <h1>All Sports</h1>
         {sports.map((sport) => (
           <div
             key={sport.id}
@@ -53,4 +52,3 @@ const AllSportsPage = () => {
 };
 
 export default AllSportsPage;
-

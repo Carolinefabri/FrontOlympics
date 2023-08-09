@@ -16,7 +16,7 @@ const AdminPage = ({ user }) => {
 
       <div>
               <NavBarAdmin />
-      <img className="adminpage" src="./public/images/admin.png" alt="adminpage" />
+      <img className="adminpage" src="../images/admin.png" alt="adminpage" />
       <button class="bttadmin" onClick={handleGetStarted}>Get started</button>
     </div>
   );
