@@ -2,15 +2,15 @@ import "../App.css";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Drawer } from "@mui/material";
-import axios from 'axios';
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/Auth.context";
+import { useContext } from 'react';
 import {
-  Avatar,
   Divider,
   ListItem,
   ListItemButton,
@@ -22,6 +22,7 @@ import {
 } from "@mui/material/";
 
 const Sidebar = () => {
+  const { user } = useContext(AuthContext);
   const location = useLocation();
   const [state, setState] = useState({
     left: false,
@@ -57,6 +58,7 @@ const Sidebar = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
+      {user && <p>{user.userName}</p>}
         {menuItems.map((text, index) => (
           <Link
             to={
@@ -65,11 +67,12 @@ const Sidebar = () => {
                 : index === 1
                 ? "/Profile"
                 : index === 2
-                ? "/favorites"
+                ? "/favorites/:user"
                 : index === 3
                 ? "/community"
                 : "/"
             }
+            key={text}
           >
             <ListItem key={text} disablePadding>
               <ListItemButton>
@@ -86,7 +89,7 @@ const Sidebar = () => {
                       <Divider />
                     </>
                   ) : (
-                    <LogoutOutlinedIcon />
+                    <LogoutOutlinedIcon/>
                   )}
                 </ListItemIcon>
 
@@ -102,11 +105,17 @@ const Sidebar = () => {
   return (
     <nav className="Sidebar">
       <React.Fragment key="right">
+      {user && <span>{user.userName}</span>}
         <Button onClick={toggleDrawer("right", true)}>
-          <Avatar
-            sx={{ width: 56, height: 56 }}
-            alt="Remy Sharp"
-            src="/static/images/avatar"
+          <Box
+            component="img"
+            sx={{
+              borderRadius: "50%",
+              height: 56,
+              width: 56,
+            }}
+            alt="The house from the offer."
+            src={user && <image>{user.image}</image>}
           />
         </Button>
         <Drawer
@@ -120,5 +129,6 @@ const Sidebar = () => {
     </nav>
   );
 };
+
 
 export default Sidebar;
