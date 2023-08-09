@@ -1,3 +1,8 @@
+@media (max-width: 768px) {
+  /* Aplique os estilos apropriados para dispositivos móveis aqui */
+
+}
+
 
 #root {
   margin: 0;
@@ -7,17 +12,17 @@
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  background-color: #fdfbfb;
+  background-color: white;
 }
 
 .h1{  
 color:white;
-
 }
+  
 
   .NavBar {
     background-color: #033f68;
-    height: 5rem;
+    height: 3rem;
     display: flex;
     align-items:center;
     justify-content:right;
@@ -49,8 +54,10 @@ color:white;
     left: 0;
     width: 100%;
     height: 3px;
-    background-color: #0FEB6D;
+    background-color: #F88932;
   }
+
+
 
   .Sidebar {
     background-color: #033f68;
@@ -72,16 +79,92 @@ color:white;
   width: 100%; /* Defina a largura do footer */
 }
 
-    /* Homepage */
-  .homephoto {
+
+
+.home-container {
+  position: relative;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 50%; /* You can adjust this value to control image aspect ratio */
+  overflow: hidden;
+}
+
+.homephoto {
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height:100%;
+  position:absolute;
+  border-radius: 0px 0 10px 10px;
+}
+
+
+.register {
+  padding: 10px 50px;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  border-radius: 32px;
+  transition: all .3s ease-in-out;
+  opacity: 0.8;
+  margin-left: 8rem;
+  margin-top:  31rem;
+}
+.register:hover {
+    background-color: #F88932;
+    cursor: pointer;
+
+  }
+  
+
+  .serviceshome {
     background-size:cover;
     background-position: center center;
     background-repeat: no-repeat;
-    margin-top: 0rem;
     width: 100%;
-    height: 100%;
+    height:100%;
+    position:absolute;
+    border-radius: 0px 0 10px 10px
+  }
+
+  .sportshome {
+    background-size:cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height:100%;
+    position:absolute;
+    margin-top: 40%;
+    border-radius: 0px 0 10px 10px
+  }
+
+
+  .testemunhahome {
+    background-size:cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height:100%;
+    position:absolute;
+    margin-top: 80%;
+  margin-left: 5%;
+    border-radius: 0px 0 10px 10px
+  }
+
   
-    }
+  .subscribehome {
+    background-size:cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height:100%;
+    position:absolute;
+    margin-top: 111%;
+    border-radius: 0px 0 10px 10px
+  }
   
       /* About*/
   .aboutphoto {
@@ -92,39 +175,182 @@ color:white;
     height:60%;
     }
   
-
-    /* SignUp*/
-.signup-container {
-
-  width: 50vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-  /*allsports*/
-.all-sports {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.sport-card {
-  width: calc(33.33% - 20px); /* 3 cards por linha */
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
+          /*sign up */
+     
+.form-container {
+  max-width: 400px;
+  padding: 40px;
+  border: 1px solid #526285;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  margin-top:5rem;
+  display: flex;
+  justify-content:center;
 }
+
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"] {
+  width: 100%;
+  padding: 9px;
+  margin-bottom: 5px;
+  border: 2px solid #526285;
+  border-radius: 10px;
+  margin-top: 2rem;
+}
+
+button {
+  background-color: #f88932;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #526285;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  margin-top: 2px;
+  border-radius: 50%; /* Transforma a área em um círculo */
+  border: 8px solid #ccc;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden; 
+}
+
+  /* login */
+  
+  .loginpage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top:5rem;
+}
+
+ /*Admin */
+     
+
+.adminpage {
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 98.9%;
+  height:99%;
+  position:absolute;
+  border-radius: 0px 0 10px 10px;
+}
+
+
+
+.bttadmin {
+   background-color: #033f68;
+  padding: 10px 50px;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  border-radius: 32px;
+  transition: all .3s ease-in-out;
+  opacity: 0.8;
+  margin-left: 32rem;
+  margin-top:  31rem;
+}
+.bttadmin:hover {
+    background-color: #ece8e4;
+    cursor: pointer;
+
+  }
+  
+  /*allsports */
+
+  .backgroundAllSports{
+    background-color: #ced6de;
+    position: relative;
+
+  }
+
+  .allsports-image {
+  background-position:center center;
+  background-repeat: no-repeat;
+  width:100%;
+  height: 30vh;
+  position:absolute;
+  top:5.5rem; /* Define a distância entre a barra de navegação e a imagem */
+  border-radius: 0px 0 0px 0px;
+}
+
+
+  .all-sports {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Distribui os itens igualmente nas colunas */
+    margin-top: 13rem;
+
+  }
+  
+  .sport-card {
+    width: calc(25% - 20px); /* 3 colunas com espaçamento */
+    margin: 10px 0;
+    padding: 10px;
+    border:100px solid #07015f;
+    text-align: center;
+    text-decoration: none !important;
+    box-sizing: border-box; 
+    border-radius: 50px 50px 50px 50px;
+    background: linear-gradient(135deg, rgba(4, 45, 99, 0.8), rgba(194, 92, 92, 0.8)); /* Gradiente de cores */
+    position: relative;
+    z-index: 1;
+  
+  }
+  
 
 .sport-image {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
+  margin: 10px;
   margin-bottom: 10px;
+  border-radius: 50px 50px 50px 50px;
 }
 
 .sport-name {
   display: block;
-  font-size: 16px;
+  font-size: 23px;
+  text-decoration: none; 
+  color: rgb(3, 0, 0);
+}
+
+/*sportdetails */
+
+ .sport-card-details {
+      background-color: #ced6de;
+    width: calc(60% - 20px); /* 3 colunas com espaçamento */
+    margin: 10px 0;
+    padding: 10px;
+    border:10px solid #f15151;
+    text-align: center;
+    text-decoration: none !important;
+    box-sizing: border-box; 
+    border-radius: 50px 50px 50px 50px;
+    background: linear-gradient(135deg, rgba(4, 45, 99, 0.8), rgba(194, 92, 92, 0.8)); /* Gradiente de cores */
+    position: relative;
+    z-index: 1;
+  
+  }
+  
+  .sport-image-details {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin: 10px;
+  margin-bottom: 10px;
+  border-radius: 0px 0px 50px 50px;
 }

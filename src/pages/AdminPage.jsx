@@ -11,19 +11,13 @@ const AdminPage = ({ user }) => {
   };
 
   return (
-    <div>
-      <NavBarAdmin />
-      <h1>Welcome, {user}!</h1>
-      <p>
-        Get ready to immerse yourself in a unique experience, where the Olympic
-        Games come to life in the beautiful city of Paris.{' '}
-      </p>
-      <p>
-        Embark on this journey with us and discover the Olympic spirit in an
-        entirely new way.
-      </p>
 
-      <button onClick={handleGetStarted}>Get started</button>
+
+
+      <div>
+              <NavBarAdmin />
+      <img className="adminpage" src="./public/images/admin.png" alt="adminpage" />
+      <button class="bttadmin" onClick={handleGetStarted}>Get started</button>
     </div>
   );
 };
