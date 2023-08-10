@@ -8,7 +8,9 @@
   margin: 0;
   padding:0 0 0 0 0 rem;
 
+
 }
+
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -17,6 +19,14 @@
 
 .h1{  
 color:white;
+}
+
+/* Estilo para dispositivos móveis (até 768px) */
+@media (max-width: 768px) {
+  .h1 {
+    font-size: 24px; /* Tamanho da fonte menor para dispositivos móveis */
+    margin-bottom: 10px; /* Margem inferior menor para dispositivos móveis */
+  }
 }
   
 
@@ -197,7 +207,13 @@ color:white;
     width: 100%;
     height:60%;
     }
-  
+  /* Estilo para dispositivos móveis (até 768px) */
+@media (max-width: 768px) {
+  .aboutphoto {
+    height: 40%; /* Reduz a altura para dispositivos móveis */
+    background-position: top center; /* Posição superior para dispositivos móveis */
+  }
+}
           /*sign up */
      
 .form-container {
@@ -291,6 +307,22 @@ button:hover {
     cursor: pointer;
 
   }
+
+  /* Estilo para dispositivos móveis (até 768px) */
+@media (max-width: 768px) {
+  .adminpage {
+    width: 100%; 
+    height: auto; 
+    position: static; 
+    border-radius: 0; 
+  }
+
+  .bttadmin {
+    margin-left: auto; /* Centralizar horizontalmente */
+    margin-right: auto;
+    margin-top: 10px; /* Espaçamento superior menor */
+  }
+}
   
   /*allsports */
 
@@ -353,6 +385,14 @@ button:hover {
   text-decoration: none; 
   color: rgb(3, 0, 0);
 }
+
+/* Estilo para dispositivos móveis (até 768px) */
+@media (max-width: 768px) {
+  .allsports-image {
+    top: 2rem; /* Espaçamento superior menor para dispositivos móveis */
+  }
+}
+
 
 /* Details */
 
@@ -429,3 +469,6 @@ button:hover {
   margin-top: -1rem;
   color:#033f68
 }
+  
+
+
