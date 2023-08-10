@@ -16,7 +16,7 @@ const AdminPage = ({ user }) => {
       <Sidebar />
       
       <div className="countdown-container">
-        <h2 className="countdown-title"> Paris 2024</h2>
+        <h2 className="countdown-title"> Paris 2024 </h2>
         <h3>The Journey Begins in...</h3>
        <strong class="contador"> <CountdownTimer targetDate={new Date('2024-07-26T00:00:00')}/></strong>
       </div>
