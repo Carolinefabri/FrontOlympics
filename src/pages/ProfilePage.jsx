@@ -54,6 +54,7 @@ const UserProfile = ({ user }) => {
       );
 
       console.log("Account updated:", response.data);
+      window.location.reload();
     } catch (error) {
       console.error("An error occurred while updating the account:", error);
     }
