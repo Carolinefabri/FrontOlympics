@@ -14,9 +14,9 @@ const NavbarAdmin = () => {
       {location.pathname !== '/admin' && (
             <li><Link to="/admin">Admin</Link></li>
           )}
-          { user && location.pathname !== `/favorites${user._id}` && (
+          { user && location.pathname !== `/favorites/64d4c3e9ae27777ece81906c` && (
                 <li>
-                  <Link to={`/favorites/${user._id}`}>Favorites</Link>
+                  <Link to={`/favorites/64d4c3e9ae27777ece81906c`}>Favorites</Link>
                 </li>
               )}
            {location.pathname !== '/allsports' && (
