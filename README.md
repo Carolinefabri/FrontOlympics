@@ -20,11 +20,11 @@ SportSoul is designed to be the ultimate companion for sports enthusiasts who ar
 
 - **Frontend**: React
 - **Backend**: Express.js, MongoDB, Mongoose
-- **External API**: WeatherAPI
+- **External API**: WeatherAPI and Tweeter comments.
 - **Styling**: CSS
 - **State Management**: React Context API
 - **Routing**: React Router
-- **Deployment**: Heroku (Backend), Netlify (Frontend)
+- **Deployment**: Adaptable (Backend), Netlify (Frontend)
 
 ## Getting Started
 
@@ -54,6 +54,9 @@ carolinefabri.dev@hotmail.com  / priscillariese.dev@gmail.com / brianadamsmaino6
 
 ### License
 **SportSoul** is licensed under the MIT License. Enjoy exploring the world of Olympic sports with SportSoul!
+
+
+Check it out : https://fanciful-mooncake-5f4f8c.netlify.app/
 
   
 
