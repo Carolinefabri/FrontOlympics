@@ -90,10 +90,7 @@ const UserProfile = ({ user }) => {
   return (
     <div>
       <Sidebar />
-      <Stack direction="column">
-        <TextField disabled label={user && <p>{user.userName}</p>} />
-        <TextField disabled label={user && <p>{user.email}</p>} />
-      </Stack>
+      
       <div
         style={{
           display: "flex",
@@ -104,12 +101,7 @@ const UserProfile = ({ user }) => {
       >
         <Stack direction="column">
           <div>
-            <Box
-              component="img"
-              sx={{ borderRadius: "50%", height: 300, width: 300 }}
-              alt="User image"
-              src={user && <p>{user.image}</p>}
-            />
+            
             <br />
             <form variant="standard" onSubmit={handleSubmit}>
               <label>
@@ -139,14 +131,7 @@ const UserProfile = ({ user }) => {
                 />
               </label>
               <br />
-              <label>
-                Profile Image:{" "}
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                />
-              </label>
+              
               <br />
               <Button variant="contained" type="submit">
                 {" "}
@@ -173,4 +158,4 @@ const LoadingWrapper = () => {
   return <UserProfile user={user} />;
 };
 
-export default {LoadingWrapper};
+export default LoadingWrapper;
