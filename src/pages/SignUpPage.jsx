@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import NavBar from '../components/NavBar';
 import {API_URL} from '../config/config.index';
+import backgroundParisImage from "/images/parissignup.jpg"; 
 
 
 
@@ -12,7 +13,6 @@ const SignUp = () => {
     userName: "",
     email: "",
     password: "",
-    profilePicture: null, // Inicialmente, sem imagem selecionada
   });
 
   const navigate = useNavigate();
@@ -25,14 +25,10 @@ const SignUp = () => {
     }));
   };
 
-  const handleImageChange = (e) => {
-    const imageFile = e.target.files[0]; // Pega o primeiro arquivo da lista
-    setFormData((prevState) => ({
-      ...prevState,
-      profilePicture: imageFile,
-    }));
-  };
 
+  const handleGetStarted = () => {
+    navigate('/login');
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -41,7 +37,7 @@ const SignUp = () => {
       formDataToSend.append("userName", userName);
       formDataToSend.append("email", email);
       formDataToSend.append("password", password);
-      formDataToSend.append("profilePicture", profilePicture);
+
 
       const response = await axios.post(
         
@@ -59,9 +55,16 @@ const SignUp = () => {
   return (
     <div>
     <NavBar />
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="userName">Username:</label>
+    <img className="backgroundParisImage " src={backgroundParisImage } alt="background.signup" /> 
+      <div className="bodyBox-up">
+      <div className="box-up">
+        <span className="borderline-up"></span>
+        <span className="borderline1-up"></span>
+      
+      <form onSubmit={handleSubmit}>  
+         <h2>Sign Up</h2>
+        <label className="inputBox-up" htmlFor="userName">
+          <span className="span-up">UserName</span>
         <input
           type="text"
           id="userName"
@@ -69,9 +72,10 @@ const SignUp = () => {
           value={formData.userName}
           onChange={handleChange}
         />
-      </div>
-      <div>
-        <label htmlFor="email">Email:</label>
+        <i></i>
+        </label>
+        <label className="inputBox-up" htmlFor="email">
+        <span className="span-up">E-mail:</span>
         <input
           type="email"
           id="email"
@@ -79,9 +83,11 @@ const SignUp = () => {
           value={formData.email}
           onChange={handleChange}
         />
-      </div>
-      <div>
-        <label htmlFor="password">Password:</label>
+          <i></i>
+        </label>
+
+        <label className="inputBox-up"htmlFor="Password" >
+        <span className="span-up">Password</span>
         <input
           type="password"
           id="password"
@@ -89,28 +95,19 @@ const SignUp = () => {
           value={formData.password}
           onChange={handleChange}
         />
-      </div>
-      <div>
-        <label htmlFor="profilePicture">Profile Picture:</label>
-        <input
-          type="file"
-          id="profilePicture"
-          name="profilePicture"
-          onChange={handleImageChange}
-        />
-      </div>
-      {formData.profilePicture && (
-        <img
-          src={URL.createObjectURL(formData.profilePicture)}
-          alt="Profile Picture"
-          style={{ width: "200px", height: "200px" }}
-        />
-      )}
-      <button type="submit">Sign Up</button>
+          <i></i>
+        </label>
+  
+      <div className="links">
+          <a href="#">Already have an account?? </a>
+          <a onClick={handleGetStarted}>Login </a>
+          </div>
+          <button type="submit">Sign Up</button>
     </form>
     </div>
+    </div>
+      </div>
   );
 };
-
 
 export default SignUp;
