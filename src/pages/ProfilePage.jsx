@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import { Button, Stack } from "@mui/material";
 import { AuthContext } from "../context/Auth.context";
 import TextField from "@mui/material/TextField";
+import {API_URL} from '../config/config.index';
 
 const UserProfile = ({ user }) => {
   const [username, setUsername] = useState(user.userName);
@@ -45,7 +46,7 @@ const UserProfile = ({ user }) => {
         },
       };
 
-      const url = `http://localhost:5005/user/edit/${user._id}`;
+      const url = `${API_URL}/user/edit/${user._id}`;
       const response = await axios.post(
         url,
         { userName: username, email: email, password: password, image: image },
@@ -76,8 +77,9 @@ const UserProfile = ({ user }) => {
       };
 
       await axios.delete(
-        `http://localhost:5005/user/delete/${user._id}`,
+        `${API_URL}/user/delete/${user._id}`,
         config
+
       );
       nav("/");
     } catch (error) {
