@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import { Drawer } from "@mui/material";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import WidgetsOutlinedIcon from '@mui/icons-material/WidgetsOutlined';
 
 
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
@@ -103,16 +104,9 @@ const Sidebar = () => {
             <li><Link to="/allsports">All Sports</Link></li>)}
             </ul>
             <Button onClick={toggleDrawer("right", true)}>
-              <Box
-                component="img"
-                sx={{
-                  borderRadius: "50%",
-                  height: 56,
-                  width: 56,
-                }}
-                alt="The house from the offer."
-                src={user.image}
-              />
+             
+            <WidgetsOutlinedIcon/>
+
             </Button>
           </>
         )}
