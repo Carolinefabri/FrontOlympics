@@ -6,7 +6,6 @@ import Box from "@mui/material/Box";
 import { Button, Stack } from "@mui/material";
 import { AuthContext } from "../context/Auth.context";
 import TextField from "@mui/material/TextField";
-import {API_URL} from '../config/config.index';
 
 const UserProfile = ({ user }) => {
   const [username, setUsername] = useState(user.userName);
@@ -172,4 +171,4 @@ const LoadingWrapper = () => {
   return <UserProfile user={user} />;
 };
 
-export default LoadingWrapper;
+export default {LoadingWrapper};

@@ -58,13 +58,40 @@ color:white;
   }
 
 
-
+/* Sidebar */
   .Sidebar {
     background-color: #033f68;
     height: 5rem;
     display: flex;
     align-items:center;
     justify-content:right;
+  }
+
+  .Sidebar ul {
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .Sidebar li {
+    padding-right: 70px;
+    list-style: none;
+    color: white;
+  }
+
+  .Sidebar p {
+    padding-right: 70px;
+    color: white;
+    font-size: 20px;
+  }
+
+  .userName{
+    font-size: 20px;
+    display: flex;
+    padding-left: 120px;
+    align-items: center;
   }
 
 /* Estilos para o footer */
@@ -75,7 +102,6 @@ color:white;
   text-align: center;
   margin-top: 200%;
 }
-
 
 .home-container {
   position: relative;

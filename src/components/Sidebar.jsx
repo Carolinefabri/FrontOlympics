@@ -49,7 +49,7 @@ const Sidebar = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {user && <p>{user.userName}</p>}
+        {user && <p className="userName">{user.userName}</p>}
         {menuItems.map((text, index) => (
           <Link
             to={
@@ -89,13 +89,15 @@ const Sidebar = () => {
       <React.Fragment key="right">
         {user && (
           <>
-            <span>{user.userName}</span>
+            <p>{user.userName}</p>
             <ul>
               {location.pathname !== `/favorites${user._id}` && (
                 <li>
                   <Link to={`/favorites/${user._id}`}>Favorites</Link>
                 </li>
               )}
+              {location.pathname !== '/allsports' && (
+            <li><Link to="/allsports">All Sports</Link></li>)}
             </ul>
             <Button onClick={toggleDrawer("right", true)}>
               <Box
