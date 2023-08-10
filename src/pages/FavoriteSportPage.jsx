@@ -70,7 +70,7 @@ const SportsPage = () => {
         <h3 style={{ textAlign: 'center', margin: '10px 0' }}>Get Ready for Game Day!</h3>
         <div className="sport-list">
           {userSports.map(({ sport, _id, comments }) => (
-            <div key={_id} className="sport-card">
+            <div key={_id} className="sport-card2">
               <h3>Sport: {sport.name}</h3>
               <p>Location: {sport.location}</p>
               <p>Venue: {sport.venue}</p>

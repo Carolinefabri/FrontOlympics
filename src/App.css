@@ -763,7 +763,7 @@ opacity:0.8;
     text-decoration: none !important;
     box-sizing: border-box; 
     border-radius: 50px 50px 50px 50px;
-    background: linear-gradient(135deg, rgba(216, 217, 218, 0.8), rgba(100, 100, 100, 0.8)); /* Gradiente de cores */
+    background: #F1F0E8;
     position: relative;
     z-index: 1;
     
@@ -806,7 +806,7 @@ opacity:0.8;
   text-align:left;
   box-sizing: border-box;
   border-radius: 50px;
-  background: linear-gradient(135deg, rgba(216, 217, 218, 0.8), rgba(100, 100, 100, 0.8)); /* Gradiente de cores */
+  background: #F1F0E8;
   position: relative;
   z-index: 1;
   margin-top: -41rem;
@@ -1047,4 +1047,206 @@ margin-top: 5px;
 
 .stack-profile button:hover {
   background: #ff2770;
+}
+
+
+/* favoritos*/
+
+.backgroundfavorites {
+  display: flex;
+  justify-content:center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  background-color: #ffffff;
+  position: relative;
+  height: 200vh; /* Define a altura total da tela */
+}
+
+.sport-cardcontent-favorites {
+  background-color:#ffffff;
+  width: calc(55% - 10px);
+  height: calc(40% - 10px);
+  margin: 50px 0;
+  padding: 30px;
+  text-align:left;
+  box-sizing: border-box;
+  border-radius: 50px;
+  background: #F1F0E8;
+  position: relative;
+  z-index: 1;
+  margin-top: -41rem;
+}
+
+.sport-carddetails h1 {
+  margin: 0; /* Remove margens padrão */
+  padding:0px 0; /* Adicione um espaçamento interno ao redor do h1 */
+}
+
+.sport-cardcontent {
+  display: flex; /* Cria uma coluna dentro do card */
+}
+
+.sport-image-favorites {
+  width: 330px;
+  height: 350px;
+  object-fit: cover;
+  margin-right: 10px; 
+  border-radius: 50px;
+  margin-top: 1rem;
+}
+
+.sport-info {
+  text-align:center; /* Alinha as informações à esquerda */
+  margin-left:2rem;
+}
+
+.button-containerfavorites {
+  display: flex;
+  justify-content: center; /* Centraliza os botões horizontalmente */
+  margin-top: -5rem;
+  margin-left:22rem;
+}
+
+
+
+/* testando contador */
+
+
+
+/* Estilos para a contagem regressiva */
+.countdown-container {
+  text-align: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 10px; /* Adiciona o raio à caixa */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra suave */
+  max-width: 400px; /* Define uma largura máxima para a caixa */
+  margin: 0 auto; /* Centraliza horizontalmente */
+  margin-top: 20px;
+}
+
+.countdown-title {
+  margin: 0;
+  font-size: 28px;
+  color: #007bff;
+}
+
+.countdown {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.contador {
+  display: inline-block;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+  color: #007bff;
+}
+
+
+/* Adicione mais estilos conforme necessário */
+
+
+.sport-list {
+  display: flex;
+  flex-wrap: wrap; /* Permite que os containers quebrem para a próxima linha */
+  justify-content: center; /* Centraliza os containers horizontalmente */
+  gap: 30px; /* Espaçamento entre os containers */
+}
+
+.sport-card2 {
+  /* Estilos do cartão do esporte, como largura, altura, margens, etc. */
+  flex: 1; 
+  max-width: 300px; 
+  width: calc(25% - 25px); /* 3 colunas com espaçamento */
+  margin: 10px 0;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none !important;
+  box-sizing: border-box; 
+  border-radius: 50px 50px 50px 50px;
+  background: #F1F0E8; /* Gradiente de cores */
+  position: relative;
+  z-index: 1;
+
+}
+
+.comment-form {
+  margin-top: 10px;
+}
+
+
+
+.comment-form button {
+  margin-top: 10px;
+  padding: 6px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+
+.comment-container {
+  margin-top: 10px;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.comment {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.comment p {
+  margin: 0;
+}
+
+.comment-actions {
+  margin-top: 5px;
+}
+
+
+
+.comment-actions button:hover {
+  background-color: #0056b3;
+}
+
+.comment-form textarea {
+  width: 80%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  /* Ajuste a altura conforme necessário */
+  height: 40px; /* Exemplo de altura menor */
+
+}
+
+.comment-actions button {
+  padding: 4px 8px;
+  margin-right: 5px; /* Adicione espaço à direita do botão */
+  background-color: #ff2770;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.comment-actions button:last-child {
+  margin-right: 0; /* Remova a margem à direita do último botão */
+}
+
+.comment-actions button:hover {
+  background-color: #ff2770;
 }
