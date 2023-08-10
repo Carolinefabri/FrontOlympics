@@ -95,9 +95,9 @@ const Sidebar = () => {
           <>
             <p>{user.userName}</p>
             <ul>
-              {location.pathname !== `/favorites${user._id}` && (
+              {location.pathname !== `/favorites/64d4c3e9ae27777ece81906c` && (
                 <li>
-                  <Link to={`/favorites/${user._id}`}>Favorites</Link>
+                  <Link to={`/favorites/64d4c3e9ae27777ece81906c`}>Favorites</Link>
                 </li>
               )}
               {location.pathname !== '/allsports' && (
