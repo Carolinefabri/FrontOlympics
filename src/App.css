@@ -7,8 +7,12 @@
 #root {
   margin: 0;
   padding:0 0 0 0 0 rem;
+  text-align: center;
 
 }
+
+
+
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -403,3 +407,6 @@ button:hover {
   margin-top: -1rem;
   color:#033f68
 }
+  
+
+
