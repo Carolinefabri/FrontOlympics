@@ -1,5 +1,4 @@
 import "../App.css";
-import "../index.css";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Drawer } from "@mui/material";
@@ -93,7 +92,6 @@ const Sidebar = () => {
       <React.Fragment key="right">
         {user && (
           <>
-            <p>{user.userName}</p>
             <ul>
               {location.pathname !== `/favorites/64d4c3e9ae27777ece81906c` && (
                 <li>
@@ -101,7 +99,11 @@ const Sidebar = () => {
                 </li>
               )}
               {location.pathname !== '/allsports' && (
-            <li><Link to="/allsports">All Sports</Link></li>)}
+            <li><Link to="/allsports">All Sports</Link></li>
+            )}
+               {location.pathname !== '/admin' && (
+            <li><Link to="/admin">Admin</Link></li>
+            )}
             </ul>
             <Button onClick={toggleDrawer("right", true)}>
              

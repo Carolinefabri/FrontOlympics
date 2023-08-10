@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
-import NavBarAdmin from '../components/NavBarAdmin';
+import Sidebar from "../components/Sidebar";
 import { API_URL } from '../config/config.index';
 
 const SportsPage = () => {
@@ -64,7 +64,7 @@ const SportsPage = () => {
    console.log(user)
   return userSports !== null ? (
     <div>
-      <NavBarAdmin />
+      <Sidebar />
       <div className="sport-container">
         <h1 style={{ textAlign: 'center', margin: '20px 0' }}>Your Favorite Sports</h1>
         <h3 style={{ textAlign: 'center', margin: '10px 0' }}>Get Ready for Game Day!</h3>

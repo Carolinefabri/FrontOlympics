@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavBarAdmin from '../components/NavBarAdmin';
+import Sidebar from '../components/Sidebar';
 import '../App.css';
 
 const AdminPage = ({ user }) => {
@@ -15,8 +15,8 @@ const AdminPage = ({ user }) => {
 
 
       <div>
-              <NavBarAdmin />
-      <img className="adminpage" src="../images/admin.png" alt="adminpage" />
+              <Sidebar />
+     
       <button class="bttadmin" onClick={handleGetStarted}>Get started</button>
     </div>
   );

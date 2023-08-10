@@ -91,20 +91,10 @@ const UserProfile = ({ user }) => {
   return (
     <div>
       <Sidebar />
-      
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <Stack direction="column">
+        <Stack className="stack-profile">
           <div>
-            
-            <br />
             <form variant="standard" onSubmit={handleSubmit}>
+              <h1>Profile Update</h1>
               <label>
                 Username:{" "}
                 <input
@@ -139,15 +129,15 @@ const UserProfile = ({ user }) => {
                 Update{" "}
               </Button>
               <br />
-              <Button variant="outlined" onClick={() => handleDelete(user._id)}>
+              <Button  variant="outlined" onClick={() => handleDelete(user._id)}>
                 {" "}
-                Delete Account{" "}
+                Delete{" "}
               </Button>
             </form>
           </div>
         </Stack>
       </div>
-    </div>
+
   );
 };
 

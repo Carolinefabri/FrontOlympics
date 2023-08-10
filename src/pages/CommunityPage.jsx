@@ -1,7 +1,6 @@
 import Sidebar from "../components/Sidebar";
-
-import '../index.css';
 import Tweet from "../components/Tweet";
+import comunidadeImage from "/images/comunidade.png"; 
 
 
 
@@ -79,9 +78,11 @@ const Community = () => {
   return (
     <div className="App">
       <Sidebar />
-      <div className="tweets-container">
-        <h1>Welcome to the Olympics Enthusiast Community!</h1>
-        <p>Join fellow fans as we cheer on our favorite athletes and celebrate the spirit of the Olympics. <br></br>Let's share the excitement and passion together! 🏅🎉</p>
+      <img className="comunidadeImage" src={comunidadeImage} alt="background.comunidade" /> 
+        <h1 style={{ textAlign: 'center', margin: '20px 0' }}> Welcome to the Olympics Enthusiast Community!</h1>
+        <h3 style={{ textAlign: 'center', margin: '20px 0' }}>Join fellow fans as we cheer on our favorite athletes and celebrate the spirit of the Olympics. <br></br>Let's share the excitement and passion together! 🏅🎉</h3>
+        <div className="tweets-container">
+    
         {tweetsArray.map((tweet, index) => (
           <Tweet key={index} tweet={tweet} />
         ))}

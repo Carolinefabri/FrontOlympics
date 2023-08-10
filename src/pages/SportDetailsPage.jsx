@@ -4,7 +4,7 @@ import { fetchSport } from '../utils/sportsAPICall';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
-import NavBarAdmin from '../components/NavBarAdmin';
+import Sidebar from '../components/Sidebar';
 import {API_URL} from '../config/config.index';
 
 const SportDetailsPage = () => {
@@ -122,7 +122,7 @@ const SportDetailsPage = () => {
   
   return sport ? (
     <div>
-      <NavBarAdmin />
+      <Sidebar />
       <div className="backgroundDetails">
    
         <div className="sport-carddetails">
