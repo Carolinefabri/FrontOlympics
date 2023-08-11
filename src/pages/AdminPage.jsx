@@ -12,9 +12,10 @@ const AdminPage = ({ user }) => {
   };
 
   return (
+   
     <div className="App"> {/* Use a classe "App" para aplicar estilos globais */}
-      <Sidebar />
-      
+    
+    <Sidebar />
       <div className="countdown-container">
         <h2 className="countdown-title"> Paris 2024 </h2>
         <h3>The Journey Begins in...</h3>

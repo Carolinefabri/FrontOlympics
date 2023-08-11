@@ -5,6 +5,7 @@ import { Drawer } from "@mui/material";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import WidgetsOutlinedIcon from '@mui/icons-material/WidgetsOutlined';
+import sportsoulImage from "/images/sportsoul1.png"; 
 
 
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
@@ -22,6 +23,7 @@ import {
 } from "@mui/material/";
 
 const Sidebar = () => {
+
   const { user } = useContext(AuthContext);
   const location = useLocation();
   const [state, setState] = useState({
@@ -46,6 +48,7 @@ const Sidebar = () => {
 
   const list = (anchor) => (
     <Box
+    
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 320 }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
@@ -89,6 +92,7 @@ const Sidebar = () => {
 
   return (
     <nav className="Sidebar">
+      <img className="sportsoulImage1" src={sportsoulImage} alt="sportsoulImage"  /> 
       <React.Fragment key="right">
         {user && (
           <>

@@ -32,8 +32,17 @@ color:white;
 }
 
 .sportsoulImage {
-  width: 20%;
-  height:370%;
+  width: 12%;
+  height: 80px;
+}
+
+.sportsoulImage1 {
+  width: 15%;
+  height: 80px;
+  position: absolute; 
+  top: 1; 
+  left: 0; 
+
 }
 
 .NavBar ul {

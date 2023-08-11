@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import "../App.css";
-import sportsoulImage from "/images/sportsoul.png"; 
+import sportsoulImage from "/images/sportsoul1.png"; 
 
 const Navbar = () => {
   const location = useLocation();
 
   return (
     <nav className="NavBar">
-         <img className="sportsoulImage" src={sportsoulImage} alt="sportsoulImage" /> 
+         <img className="sportsoulImage" src={sportsoulImage} alt="sportsoulImage"  /> 
       <ul> 
         <li><Link to="/">Home</Link></li>
         <li><Link to="/about">About It</Link></li>
