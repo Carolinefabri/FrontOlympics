@@ -1,152 +1,130 @@
-import Sidebar from "../components/Sidebar";
-import { useNavigate } from "react-router-dom";
-import React, { useState, useContext } from "react";
-import axios from "axios";
-import Box from "@mui/material/Box";
-import { Button, Stack } from "@mui/material";
+import "../App.css";
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { Drawer } from "@mui/material";
+import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import WidgetsOutlinedIcon from '@mui/icons-material/WidgetsOutlined';
+import sportsoulImage from "/images/sportsoul1.png"; 
+
+
+import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../context/Auth.context";
-import TextField from "@mui/material/TextField";
-import {API_URL} from '../config/config.index';
+import { useContext } from "react";
+import {
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  List,
+  Box,
+  Button,
+} from "@mui/material/";
 
-const UserProfile = ({ user }) => {
-  const [username, setUsername] = useState(user.userName);
-  const [email, setEmail] = useState(user.email);
-  const [password, setPassword] = useState("");
-  const [image, setImage] = useState(user.image);
-  console.log(user);
+const Sidebar = () => {
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
+  const { user } = useContext(AuthContext);
+  const location = useLocation();
+  const [state, setState] = useState({
+    left: false,
+    right: false,
+    top: false,
+    bottom: false,
+  });
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    const newPassword = event.target.value.trim();
-    setPassword(newPassword);
-    setPassword(event.target.value);
-  };
-
-  const handleImageChange = (event) => {
-    const newImage = event.target.value.trim();
-    setImage(newImage);
-    setImage(event.target.value);
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      const token = localStorage.getItem("authToken");
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-
-      const url = `${API_URL}/user/edit/${user._id}`;
-      const response = await axios.post(
-        url,
-        { userName: username, email: email, password: password, image: image },
-        config
-      );
-
-      console.log("Account updated:", response.data);
-      window.location.reload();
-    } catch (error) {
-      console.error("An error occurred while updating the account:", error);
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
     }
+    setState({ ...state, [anchor]: open });
   };
 
-  // Handle delete account
-  const nav = useNavigate();
-  const handleDelete = async () => {
-    try {
-      const token = localStorage.getItem("authToken");
-      console.log(token);
-      if (!token) {
-        console.error("No token found.");
-        return;
-      }
+  const menuItems = ["Profile", "Community", "Logout"];
 
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
+  const list = (anchor) => (
+    <Box
+    
+      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 320 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+      {user && <p className="userName">{user.userName}</p>}
+      {menuItems.map((text, index) => (
+        <Link
+          to={
+            index === 0
+              ? "/Profile"
+              : index === 1
+              ? "/community"
+              : "/"
+          }
+          key={text}
+        >
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index % 2 === 0 ? (
+                    <ManageAccountsOutlinedIcon />
+                  ) : index % 3 === 1 ? (
+                    <PeopleAltOutlinedIcon />
+                  ) : index % 3 === 2 ? (
+                    <LogoutOutlinedIcon />
+                  ) : null}
+                </ListItemIcon>
 
-      await axios.delete(
-        `${API_URL}/user/delete/${user._id}`,
-        config
-
-      );
-      nav("/");
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
+        ))}
+      </List>
+    </Box>
+  );
 
   return (
-    <div>
-      <Sidebar />
-        <Stack className="stack-profile">
-          <div>
-            <form variant="standard" onSubmit={handleSubmit}>
-              <h1>Profile UpDate</h1>
-              <label>
-                Username:{" "}
-                <input
-                  type="text"
-                  value={username}
-                  onChange={handleUsernameChange}
-                />
-              </label>
-              <br />
-              <label>
-                Email:{" "}
-                <input
-                  type="email"
-                  value={email}
-                  onChange={handleEmailChange}
-                />
-              </label>
-              <br />
-              <label>
-                Password:{" "}
-                <input
-                  type="password"
-                  value={password}
-                  onChange={handlePasswordChange}
-                />
-              </label>
-              <br />
-              
-              <br />
-              <Button variant="contained" type="submit">
-                {" "}
-                Update{" "}
-              </Button>
-              <br />
-              <Button  variant="outlined" onClick={() => handleDelete(user._id)}>
-                {" "}
-                Delete{" "}
-              </Button>
-            </form>
-          </div>
-        </Stack>
-      </div>
+    <nav className="Sidebar">
+      <img className="sportsoulImage1" src={sportsoulImage} alt="sportsoulImage"  /> 
+      <React.Fragment key="right">
+        {user && (
+          <>
+            <ul>
+              {location.pathname !== `/favorites/64d4c3e9ae27777ece81906c` && (
+                <li>
+                  <Link to={`/favorites/64d4c3e9ae27777ece81906c`}>Favorites</Link>
+                </li>
+              )}
+              {location.pathname !== '/allsports' && (
+            <li><Link to="/allsports">All Sports</Link></li>
+            )}
+               {location.pathname !== '/admin' && (
+            <li><Link to="/admin">Admin</Link></li>
+            )}
+            </ul>
+            <Button onClick={toggleDrawer("right", true)}>
+             
+            <WidgetsOutlinedIcon/>
 
+            </Button>
+          </>
+        )}
+
+        <Drawer
+          anchor="right"
+          open={state["right"]}
+          onClose={toggleDrawer("right", false)}
+        >
+          {list("right")}
+        </Drawer>
+      </React.Fragment>
+    </nav>
   );
 };
 
-const LoadingWrapper = () => {
-  const { user } = useContext(AuthContext);
-  if (!user) {
-    return null;
-  }
-  return <UserProfile user={user} />;
-};
-
-export default LoadingWrapper;
+export default Sidebar;

@@ -94,7 +94,7 @@ const UserProfile = ({ user }) => {
         <Stack className="stack-profile">
           <div>
             <form variant="standard" onSubmit={handleSubmit}>
-              <h1>Profile Update</h1>
+              <h1>Profile UpDate</h1>
               <label>
                 Username:{" "}
                 <input
