@@ -1272,3 +1272,21 @@ margin-top: 5px;
 .comment-actions button:hover {
   background-color: #ff2770;
 }
+
+.btparis {
+  background-color: #2d7be0;
+ padding: 10px 50px;
+ color: rgb(0, 0, 0);
+ text-decoration: none;
+ border-radius: 32px;
+ transition: all .3s ease-in-out;
+ opacity: 0.8;
+ margin-left: 3rem;
+ margin-top:  29rem;
+}
+
+.btparis:hover {
+background: #ff2770;
+  cursor: pointer;
+
+}

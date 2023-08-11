@@ -48,6 +48,10 @@ const AdminPage = ({ user }) => {
     <img className="parisImage " src={parisImage} alt="parisImage" /> 
     </section>
       <button className="bttadmin" onClick={handleGetStarted}><strong>Get Started</strong></button>
+      <a
+          href="https://www.paris2024.org/en/tickets/"
+          target="_blank" 
+          rel="noopener noreferrer"  className="btparis"><strong>To buy Tickets</strong></a>
     </div>
   );
 };
