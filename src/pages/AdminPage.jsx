@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import CountdownTimer from '../components/CountdownTimer';
+import pageAdminImage from "/images/pageadmi.jpg";
 import '../App.css'; // Importe o arquivo de estilos global
 
 const AdminPage = ({ user }) => {
@@ -21,7 +22,9 @@ const AdminPage = ({ user }) => {
         <h3>The Journey Begins in...</h3>
        <strong class="contador"> <CountdownTimer targetDate={new Date('2024-07-26T00:00:00')}/></strong>
       </div>
-
+      <section>
+    <img className="pageAdminImage " src={pageAdminImage} alt="pageAdminImage" /> 
+    </section>
     
       <button className="bttadmin" onClick={handleGetStarted}>Get Started</button>
     </div>
