@@ -57,6 +57,7 @@ carolinefabri.dev@hotmail.com  / priscillariese.dev@gmail.com / brianadamsmaino6
 
 
 Check it out : https://fanciful-mooncake-5f4f8c.netlify.app/
+Presentation : https://docs.google.com/presentation/d/1f4gwbiipaD6RuHVoWx4HdTpw3m89Uw_LjUS3b87dVjA/edit?usp=sharing
 
   
 
