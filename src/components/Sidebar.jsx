@@ -1,13 +1,10 @@
 import "../App.css";
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Drawer } from "@mui/material";
+import WidgetsOutlinedIcon from '@mui/icons-material/WidgetsOutlined';
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import WidgetsOutlinedIcon from '@mui/icons-material/WidgetsOutlined';
-import sportsoulImage from "/images/sportsoul1.png"; 
-
-
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/Auth.context";
@@ -23,7 +20,6 @@ import {
 } from "@mui/material/";
 
 const Sidebar = () => {
-
   const { user } = useContext(AuthContext);
   const location = useLocation();
   const [state, setState] = useState({
@@ -44,51 +40,60 @@ const Sidebar = () => {
     setState({ ...state, [anchor]: open });
   };
 
-  const menuItems = ["Profile", "Community", "Logout"];
+  const navigate = useNavigate();
 
-  const list = (anchor) => (
-    <Box
-    
-      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 320 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        {user && <p className="userName">{user.userName}</p>}
-        {menuItems.map((text, index) => (
-          <Link
-            to={
-              index % 2 === 0
-                ? "/Profile"
-                : index === 1
-                ? "/community"
-                : index === 2
-                ? "/"
-                : "/"
-            }
-            key={text}
-          >
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? (
-                    <ManageAccountsOutlinedIcon />
-                  ) : index % 3 === 1 ? (
-                    <PeopleAltOutlinedIcon />
-                  ) : index % 3 === 2 ? (
-                    <LogoutOutlinedIcon />
-                  ) : null}
-                </ListItemIcon>
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("user");
+    authenticateUser(); 
+    navigate("/");
+  };
+  const menuItems = ["Profile", "Community"];
 
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-    </Box>
-  );
+if (user) {
+  menuItems.push(<a href="/" onClick={handleLogout}>Logout</a>);
+}
+
+const list = (anchor) => (
+  <Box
+    sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 320 }}
+    role="presentation"
+    onClick={toggleDrawer(anchor, false)}
+    onKeyDown={toggleDrawer(anchor, false)}
+  >
+    <List>
+      {user && <p className="userName">{user.userName}</p>}
+      {menuItems.map((text, index) => (
+        <Link
+          to={
+            index === 0
+              ? "/Profile"
+              : index === 1
+              ? "/community"
+              : "/"
+          }
+          key={text}
+        >
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index === 0 ? (
+                  <ManageAccountsOutlinedIcon />
+                ) : index === 1 ? (
+                  <PeopleAltOutlinedIcon />
+                ) : index === 2 ? (
+                  <LogoutOutlinedIcon />
+                ) : null}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+      ))}
+    </List>
+  </Box>
+);
+
 
   return (
     <nav className="Sidebar">
