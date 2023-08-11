@@ -1,12 +1,11 @@
 import "../App.css";
-import "../index.css";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Drawer } from "@mui/material";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import WidgetsOutlinedIcon from '@mui/icons-material/WidgetsOutlined';
-import sportsoulImage from "/images/sportsoul1.png";
+import sportsoulImage from "/images/sportsoul1.png"; 
 
 
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
@@ -24,6 +23,7 @@ import {
 } from "@mui/material/";
 
 const Sidebar = () => {
+
   const { user } = useContext(AuthContext);
   const location = useLocation();
   const [state, setState] = useState({
@@ -48,26 +48,25 @@ const Sidebar = () => {
 
   const list = (anchor) => (
     <Box
+    
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 320 }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {user && <p className="userName">{user.userName}</p>}
-        {menuItems.map((text, index) => (
-          <Link
-            to={
-              index % 2 === 0
-                ? "/Profile"
-                : index === 1
-                ? "/community"
-                : index === 2
-                ? "/"
-                : "/"
-            }
-            key={text}
-          >
+      {user && <p className="userName">{user.userName}</p>}
+      {menuItems.map((text, index) => (
+        <Link
+          to={
+            index === 0
+              ? "/Profile"
+              : index === 1
+              ? "/community"
+              : "/"
+          }
+          key={text}
+        >
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -88,7 +87,6 @@ const Sidebar = () => {
       </List>
     </Box>
   );
-
 
   return (
     <nav className="Sidebar">
